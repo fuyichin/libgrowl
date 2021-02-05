@@ -38,9 +38,9 @@
 /* Begin PBXFileReference section */
 		A7BBE11325CD397F004756F4 /* libgrowl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libgrowl.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BBE11C25CD3A64004756F4 /* libgrowl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = libgrowl.c; sourceTree = "<group>"; usesTabs = 1; };
-		A7BBE11D25CD3A64004756F4 /* libgrowl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libgrowl.h; sourceTree = "<group>"; };
+		A7BBE11D25CD3A64004756F4 /* libgrowl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libgrowl.h; sourceTree = "<group>"; usesTabs = 1; };
 		A7BBE13425CD3E11004756F4 /* growlnotify */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = growlnotify; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7BBE13625CD3E11004756F4 /* growlnotify.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = growlnotify.c; sourceTree = "<group>"; };
+		A7BBE13625CD3E11004756F4 /* growlnotify.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = growlnotify.c; sourceTree = "<group>"; usesTabs = 1; };
 		A7BBE13D25CD41AB004756F4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A7BBE13E25CD4760004756F4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A7BBE13F25CD47BB004756F4 /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
@@ -83,6 +83,7 @@
 				A7BBE13B25CD3EC1004756F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		A7BBE11425CD397F004756F4 /* Products */ = {
 			isa = PBXGroup;
