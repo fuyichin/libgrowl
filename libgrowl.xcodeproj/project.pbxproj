@@ -1,0 +1,414 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A7BBE11E25CD3A64004756F4 /* libgrowl.c in Sources */ = {isa = PBXBuildFile; fileRef = A7BBE11C25CD3A64004756F4 /* libgrowl.c */; };
+		A7BBE11F25CD3A64004756F4 /* libgrowl.h in Headers */ = {isa = PBXBuildFile; fileRef = A7BBE11D25CD3A64004756F4 /* libgrowl.h */; };
+		A7BBE13725CD3E11004756F4 /* growlnotify.c in Sources */ = {isa = PBXBuildFile; fileRef = A7BBE13625CD3E11004756F4 /* growlnotify.c */; };
+		A7BBE13C25CD3EC1004756F4 /* libgrowl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BBE11325CD397F004756F4 /* libgrowl.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A7BBE14425CD73B0004756F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7BBE10B25CD397F004756F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7BBE11225CD397F004756F4;
+			remoteInfo = libgrowl;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A7BBE13225CD3E11004756F4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A7BBE11325CD397F004756F4 /* libgrowl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libgrowl.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7BBE11C25CD3A64004756F4 /* libgrowl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = libgrowl.c; sourceTree = "<group>"; usesTabs = 1; };
+		A7BBE11D25CD3A64004756F4 /* libgrowl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libgrowl.h; sourceTree = "<group>"; };
+		A7BBE13425CD3E11004756F4 /* growlnotify */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = growlnotify; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7BBE13625CD3E11004756F4 /* growlnotify.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = growlnotify.c; sourceTree = "<group>"; };
+		A7BBE13D25CD41AB004756F4 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A7BBE13E25CD4760004756F4 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A7BBE13F25CD47BB004756F4 /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		A7BBE14025CD4812004756F4 /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
+		A7BBE14125CD48A1004756F4 /* ROADMAP */ = {isa = PBXFileReference; lastKnownFileType = text; path = ROADMAP; sourceTree = "<group>"; };
+		A7BBE14225CD6A96004756F4 /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A7BBE11125CD397F004756F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7BBE13125CD3E11004756F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7BBE13C25CD3EC1004756F4 /* libgrowl.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A7BBE10A25CD397F004756F4 = {
+			isa = PBXGroup;
+			children = (
+				A7BBE14225CD6A96004756F4 /* TODO */,
+				A7BBE14125CD48A1004756F4 /* ROADMAP */,
+				A7BBE14025CD4812004756F4 /* NEWS */,
+				A7BBE13F25CD47BB004756F4 /* AUTHORS */,
+				A7BBE13D25CD41AB004756F4 /* README.md */,
+				A7BBE13E25CD4760004756F4 /* LICENSE */,
+				A7BBE12025CD3BCE004756F4 /* examples */,
+				A7BBE11B25CD3A11004756F4 /* src */,
+				A7BBE11425CD397F004756F4 /* Products */,
+				A7BBE13B25CD3EC1004756F4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A7BBE11425CD397F004756F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7BBE11325CD397F004756F4 /* libgrowl.a */,
+				A7BBE13425CD3E11004756F4 /* growlnotify */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7BBE11B25CD3A11004756F4 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				A7BBE11C25CD3A64004756F4 /* libgrowl.c */,
+				A7BBE11D25CD3A64004756F4 /* libgrowl.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		A7BBE12025CD3BCE004756F4 /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				A7BBE13625CD3E11004756F4 /* growlnotify.c */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
+		A7BBE13B25CD3EC1004756F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A7BBE10F25CD397F004756F4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7BBE11F25CD3A64004756F4 /* libgrowl.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A7BBE11225CD397F004756F4 /* libgrowl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7BBE11725CD397F004756F4 /* Build configuration list for PBXNativeTarget "libgrowl" */;
+			buildPhases = (
+				A7BBE10F25CD397F004756F4 /* Headers */,
+				A7BBE11025CD397F004756F4 /* Sources */,
+				A7BBE11125CD397F004756F4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libgrowl;
+			productName = libgrowl;
+			productReference = A7BBE11325CD397F004756F4 /* libgrowl.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A7BBE13325CD3E11004756F4 /* growlnotify */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7BBE13825CD3E11004756F4 /* Build configuration list for PBXNativeTarget "growlnotify" */;
+			buildPhases = (
+				A7BBE13025CD3E11004756F4 /* Sources */,
+				A7BBE13125CD3E11004756F4 /* Frameworks */,
+				A7BBE13225CD3E11004756F4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A7BBE14525CD73B0004756F4 /* PBXTargetDependency */,
+			);
+			name = growlnotify;
+			productName = growlnotify;
+			productReference = A7BBE13425CD3E11004756F4 /* growlnotify */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A7BBE10B25CD397F004756F4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Chin Hooi Chee";
+				TargetAttributes = {
+					A7BBE11225CD397F004756F4 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+					};
+					A7BBE13325CD3E11004756F4 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A7BBE10E25CD397F004756F4 /* Build configuration list for PBXProject "libgrowl" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A7BBE10A25CD397F004756F4;
+			productRefGroup = A7BBE11425CD397F004756F4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A7BBE11225CD397F004756F4 /* libgrowl */,
+				A7BBE13325CD3E11004756F4 /* growlnotify */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A7BBE11025CD397F004756F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7BBE11E25CD3A64004756F4 /* libgrowl.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7BBE13025CD3E11004756F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7BBE13725CD3E11004756F4 /* growlnotify.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A7BBE14525CD73B0004756F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7BBE11225CD397F004756F4 /* libgrowl */;
+			targetProxy = A7BBE14425CD73B0004756F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A7BBE11525CD397F004756F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A7BBE11625CD397F004756F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A7BBE11825CD397F004756F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A7BBE11925CD397F004756F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A7BBE13925CD3E11004756F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A7BBE13A25CD3E11004756F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7BBE10E25CD397F004756F4 /* Build configuration list for PBXProject "libgrowl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7BBE11525CD397F004756F4 /* Debug */,
+				A7BBE11625CD397F004756F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7BBE11725CD397F004756F4 /* Build configuration list for PBXNativeTarget "libgrowl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7BBE11825CD397F004756F4 /* Debug */,
+				A7BBE11925CD397F004756F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7BBE13825CD3E11004756F4 /* Build configuration list for PBXNativeTarget "growlnotify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7BBE13925CD3E11004756F4 /* Debug */,
+				A7BBE13A25CD3E11004756F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A7BBE10B25CD397F004756F4 /* Project object */;
+}

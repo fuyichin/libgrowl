@@ -1,0 +1,6 @@
+Roadmap for 2020
+
+* to be compiled successfully on macOS, Linux and Windows platform
+* able use automake
+* support packaging system Linux Debian
+* source packaging use $ make dist; make dist-all ==> *.tar.gz

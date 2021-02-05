@@ -1,0 +1,26 @@
+TODO
+=====
+
+Xcode
+=====
+
+Unix/Linux
+=====
+
+* automake file
+
+libgrowl
+=====
+
+* When server reply with error, show what is the error.
+
+* Retrieve platform name and version.
+
+* Can change ip and port
+
+* Can use machine name as ip eg. "localhost" to replace '127.0.0.1"
+
+growlnotify
+=====
+
+* print help message
