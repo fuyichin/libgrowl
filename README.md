@@ -58,3 +58,26 @@ Code function comment
 -----
 Use Doxygen style comment.
 Try avoid using // but /* */
+
+Test: cmocka
+-----
+Use cmocka as testing framework, as cmocka is simple and lightweight
+
+$ brew install cmocka (v1.1.5)
+
+libgrowl $ make test
+...
+gntp_decode_reply_test
+[==========] Running 2 test(s).
+[ RUN      ] test_gntp_decode_reply_ok
+[       OK ] test_gntp_decode_reply_ok
+[ RUN      ] test_gntp_decode_reply_fail
+[       OK ] test_gntp_decode_reply_fail
+[==========] 2 test(s) run.
+[  PASSED  ] 2 test(s).
+0 program(s) fail
+
+edit the cmocka Makefile, if necessary:
+CMOCKA_LIB_PATH=/usr/local/lib
+
+Read gntp_decode_reply_test.c as a sample program.
