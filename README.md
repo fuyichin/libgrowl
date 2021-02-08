@@ -59,6 +59,14 @@ Code function comment
 Use Doxygen style comment.
 Try avoid using // but /* */
 
+Compiler preprocessor?
+-----
+Specific code the following platform use the following predefine value
+macOS: _Darwin
+POSIX: _POSIX
+
+eg. $ gcc -D_Darwin -c libgrowl.c
+
 Test: cmocka
 -----
 Use cmocka as testing framework, as cmocka is simple and lightweight
@@ -80,4 +88,4 @@ gntp_decode_reply_test
 edit the cmocka Makefile, if necessary:
 CMOCKA_LIB_PATH=/usr/local/lib
 
-Read gntp_decode_reply_test.c as a sample program.
+Read gntp_decode_reply_test.c, check_default_setting_test.c as sample program.

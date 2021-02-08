@@ -46,6 +46,6 @@
 #define MESSAGETYPE_NOTIFY  "NOTIFY"
 #define MESSAGETYPE_REGISTER  "REGISTER"
 
-void libgrowl_set_debug(int);
+void libgrowl_set_debug_level(int);
 int growl_register_notifications(char *, char **);
 int growl_send_notification(char *, char *, char *, char *);

@@ -1,7 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -ansi -g
 
-all: libgrowl.o
+all: libgrowl.a
+
+libgrowl.a: libgrowl.o
 	ar -r libgrowl.a libgrowl.o
 
 libgrowl: libgrowl.o

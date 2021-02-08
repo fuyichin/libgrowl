@@ -14,13 +14,33 @@ libgrowl
 
 * When server reply with error, show what is the error.
 
+* What is the minimalist of GNTP header?
+
 * Retrieve platform name and version.
 
 * Can change ip and port
 
 * Can use machine name as ip eg. "localhost" to replace '127.0.0.1"
 
+* function: char *gntp_get_header_value(
+	return_value, 
+	sizeof(return_value),
+	header-code,
+	gntp_message)
+eg. header-code:Origin-Software-Name ==> libgrowl
+The libgrowl store in return_value and also return in the function
+
+* feature: return the fail reason from GNTP in debug level 1:
+eg. Required header missing (Notification-Title)
+
+* (x) rename libgrowl_set_debug() to libgrowl_set_debug_level()
+
 growlnotify
 =====
 
 * print help message
+
+VSCode
+=====
+
+* 'libgrowl.h' file not found, not configured properly (extension:C/C++ Clang Command Adapter aka clangd)

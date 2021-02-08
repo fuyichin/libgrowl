@@ -3,7 +3,9 @@ CFLAGS = -Wall
 CFLAGS += -I../src
 CMOCKA_LIB_PATH=/usr/local/lib
 #program=./gntp_decode_reply_test
-program=gntp_decode_reply_test
+program=gntp_decode_reply_test \
+gntp_get_header_value_test \
+check_default_setting_test
 
 all: $(program)
 
@@ -13,9 +15,15 @@ libgrowl.o: ../src/libgrowl.c
 gntp_decode_reply_test: gntp_decode_reply_test.o libgrowl.o
 	$(CC) -o gntp_decode_reply_test gntp_decode_reply_test.o libgrowl.o -L$(CMOCKA_LIB_PATH) -lcmocka
 
+check_default_setting_test: check_default_setting_test.o libgrowl.o
+	$(CC) -o check_default_setting_test check_default_setting_test.o libgrowl.o -L$(CMOCKA_LIB_PATH) -lcmocka
+
+gntp_get_header_value_test: gntp_get_header_value_test.o libgrowl.o
+	$(CC) -o gntp_get_header_value_test gntp_get_header_value_test.o libgrowl.o -L$(CMOCKA_LIB_PATH) -lcmocka
+
 test: $(program)
-	# run unit test
-	./run_unit_test.sh $(program)
+# run unit test
+	@sh ./run_unit_test.sh "$(program)"
 
 clean:
 	rm -f $(program)

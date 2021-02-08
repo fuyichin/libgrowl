@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	char *title, *text, *port_str;
 	
 	/* process parameters */
-	libgrowl_set_debug(0);
+	libgrowl_set_debug_level(0);
 	title= "libgrowl"; /* title is required */
 	text= "Hello, libgrowl"; /* message is optional */
 	if (argc==1) {
@@ -28,11 +28,11 @@ int main(int argc, char *argv[])
 		int i= 0, counter= 0;
 		for (i=1; i<argc; i++) {
 			if (strcmp(argv[i],"-v")==0) {
-				libgrowl_set_debug(1);
+				libgrowl_set_debug_level(1);
 				continue;
 			}
 			else if (strcmp(argv[i],"-vv")==0) {
-				libgrowl_set_debug(2);
+				libgrowl_set_debug_level(2);
 				continue;
 			}
 			else if (argv[i][0]=='-')

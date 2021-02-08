@@ -5,10 +5,11 @@ CFLAGS += -I../src
 all: growlnotify
 
 libgrowl.o: ../src/libgrowl.c
-	$(CC) -c ../src/libgrowl.c -o growlnotify.o -I../src
+	$(CC) -c ../src/libgrowl.c -I../src
 
-growlnotify: growlnotify.o
-	$(CC) -o growlnotify growlnotify.o -I../src -L../src -lgrowl
+growlnotify: growlnotify.o libgrowl.o
+#	$(CC) -o growlnotify growlnotify.o -I../src -L../src -lgrowl
+	$(CC) -o growlnotify growlnotify.o libgrowl.o
 
 clean:
 	rm -f growlnotify

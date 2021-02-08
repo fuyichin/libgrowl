@@ -31,15 +31,32 @@ struct gntp_message {
 	int status;  /* 0-ok */
 };
 
-static int debug_level= 2;  /* 0-no debug */
+static int debug_level= 1;  /* 0-no debug, 1,2 simple info, 3-for developers */
 static char *g_host= "127.0.0.1"; /* localhost */
 static int g_port= GROWL_DEFAULT_PORT; /* GROWL_DEFAULT_PORT */
 
 static char *g_platform_name= NULL;
 
-void libgrowl_set_debug(int n)
+
+void libgrowl_set_debug_level(int n)
 {
 	debug_level= n;
+}
+
+int libgrowl_get_debug_level(void)
+{
+	return debug_level;
+}
+
+/*
+void libgrowl_set_host(char *name)
+{
+	if (strlen(name)>=sizeof(g_host));
+} */
+
+char *libgrowl_get_host(void)
+{
+	return g_host; /* can I do like this? */
 }
 
 /* this infomration retrieve information from unix kernet
@@ -85,6 +102,71 @@ void gntp_decode_reply(char *reply, struct gntp_message *msg)
 		token= strtok(NULL, s);
 	}
 	
+}
+
+/**
+ *  retrieve header value in GNTP protocol
+ *  @author  <a href="mailto:fuyichin@gmail.com">hooichee</a>
+ *  @param value  return value
+ *  @param size  size of data, to control out of bound
+ *  @param message gntop protocol message
+ *  @return header code value eg. 
+ *
+ *  return 0-sucess
+ */
+char *gntp_get_header_value(char *value, int size, char *header_code, char *message) 
+{
+	const char s[]= "\n";
+	char *token;
+	char msg1[1024];
+	char key[80+1]= "lemon:";
+
+	/* init */
+	value[0]= '\0'; /* value= "" will point to NULL, or can use value[0]= '\0'; or strcpy(value,""); */
+
+	/* boundry check */
+	if (strlen(header_code)>=sizeof(key)+1)
+		return "";
+	strcpy(key,header_code);
+	strcat(key,": ");
+
+	/* boundry check */
+	if (strlen(message)>=sizeof(msg1))
+		return "";
+	strcpy(msg1,message);  /* copy to a buffer for strtok */
+
+	/* split message with \r\n */
+    token= strtok(msg1,s);
+	if (debug_level>=3)
+		fprintf(stdout, "checking key [%s] in the message list:\n", key);
+	while(token!=NULL) {
+	    token[strlen(token)-1]= '\0'; /* replace \r with \w for further processing */
+
+		if (strncmp(key,token,strlen(key))==0 && strlen(token)>strlen(key)) { 
+			/* boundry check to prevent p_value point to '\0', 'lemon:' with empty value */
+			char *p_value= (token+strlen(key)); /* apple:red\0, after the key is the value */
+			int pvalue_len= strlen(p_value);
+
+			if (size>pvalue_len+1) {/* check value buffer is big enough */
+				strcpy(value,p_value);
+			}
+			else {
+				strncpy(value,p_value,size);
+				value[size-1]= '\0'; /* part of the value will be trim */
+			}
+			break;
+		}
+
+        token= strtok(NULL,s);
+	}
+	if (debug_level>=3) {
+		if (value[0]=='\0') {
+			fprintf(stdout, "key [%s] not found!!!\n", key);
+		}
+		else
+			fprintf(stdout, "key [%s] found.\n", key);
+	}
+	return value;
 }
 
 /* function start with gntp used by internal */
