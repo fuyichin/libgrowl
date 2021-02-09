@@ -27,6 +27,13 @@
 #define min(a,b) (a<b)?(a):(b)
 #endif
 
+#ifndef FALSE
+#define FALSE  0
+#define TRUE   !FALSE
+#endif
+
+#define MINIMALIST_GROWL  FALSE
+
 struct gntp_message {
 	int status;  /* 0-ok */
 };
@@ -34,7 +41,7 @@ struct gntp_message {
 static int debug_level= 1;  /* 0-no debug, 1,2 simple info, 3-for developers */
 static char *g_host= "127.0.0.1"; /* localhost */
 static int g_port= GROWL_DEFAULT_PORT; /* GROWL_DEFAULT_PORT */
-
+static int g_minimalist_mode= MINIMALIST_GROWL;
 static char *g_platform_name= NULL;
 
 
@@ -57,6 +64,16 @@ void libgrowl_set_host(char *name)
 char *libgrowl_get_host(void)
 {
 	return g_host; /* can I do like this? */
+}
+
+void libgrowl_set_minimalist_mode(int mode)
+{
+	g_minimalist_mode= mode;
+}
+
+int libgrowl_get_minimalist_mode(void)
+{
+	return g_minimalist_mode;
 }
 
 /* this infomration retrieve information from unix kernet
@@ -305,28 +322,38 @@ int growl_register_notifications(char *app, char **notifications)
 	message[0]= '\0';
 	sprintf(text, "%s %s %s%s", GNTP_VERSION, MESSAGETYPE_REGISTER, ENCRYPTION_NONE, LINE_BREAK);
 	strcat(message, text);
-	gethostname(hostname, HOST_NAME_MAX);
-	if (debug_level>=2)
-		printf("homename=%s\n", hostname);
-	sprintf(text, "%s: %s%s", HEADER_ORIGIN_MACHINE_NAME, hostname, LINE_BREAK);
-	strcat(message, text);
-	sprintf(text, "%s: %s%s", HEADER_ORIGIN_SOFTWARE_NAME, app, LINE_BREAK);
-	strcat(message, text);
-	sprintf(text, "%s: %s%s", HEADER_ORIGIN_SOFTWARE_VERSION, LIBGROWL_VERSION, LINE_BREAK);
-	strcat(message, text);
+	if (libgrowl_get_minimalist_mode()==FALSE) {
+		gethostname(hostname, HOST_NAME_MAX);
+		if (debug_level>=2)
+			printf("homename=%s\n", hostname);
+		sprintf(text, "%s: %s%s", HEADER_ORIGIN_MACHINE_NAME, hostname, LINE_BREAK);
+		strcat(message, text);
+		sprintf(text, "%s: %s%s", HEADER_ORIGIN_SOFTWARE_NAME, app, LINE_BREAK);
+		strcat(message, text);
+		sprintf(text, "%s: %s%s", HEADER_ORIGIN_SOFTWARE_VERSION, LIBGROWL_VERSION, LINE_BREAK);
+		strcat(message, text);
 	
-	unix_get_system_name(system_name,sizeof(system_name));
-	if (g_platform_name!=NULL) {
-		/* these 2 are optional */
-		sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_NAME, "Mac OS X", LINE_BREAK);
-		strcat(message, text);
-		sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_VERSION, "10.13.6", LINE_BREAK);
-		strcat(message, text);
-	}
+		unix_get_system_name(system_name,sizeof(system_name));
+		if (g_platform_name!=NULL) {
+			/* these 2 are optional */
+			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_NAME, "Mac OS X", LINE_BREAK);
+			strcat(message, text);
+			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_VERSION, "10.13.6", LINE_BREAK);
+			strcat(message, text);
+			}
+		}
+/* debug
+	else { 
+		fprintf(stdout, "** minimalist is TRUE(in libgrowl %d, FALSE=%d)\n", 
+			libgrowl_get_minimalist_mode(), FALSE);
+		return 0;
+		}
+*/
+
 	sprintf(text, "%s: %s%s", HEADER_APPLICATION_NAME, app, LINE_BREAK);
 	strcat(message, text);
 	sprintf(text, "%s: %d%s%s", HEADER_NOTIFICATIONS_COUNT, notification_count,
-			LINE_BREAK, LINE_BREAK);
+		LINE_BREAK, LINE_BREAK);
 	strcat(message, text);
 	
 	for (i=0; i<notification_count; i++) {
@@ -382,23 +409,25 @@ int growl_send_notification(char *app, char *notification, char *title, char *co
 	message[0]= '\0';
 	sprintf(text, "%s %s %s%s", GNTP_VERSION, MESSAGETYPE_NOTIFY, ENCRYPTION_NONE, LINE_BREAK);
 	strcat(message, text);
-	gethostname(hostname, HOST_NAME_MAX);
-	if (debug_level>=2)
-		printf("homename=%s\n", hostname);
-	sprintf(text, "%s: %s%s", HEADER_ORIGIN_MACHINE_NAME, hostname, LINE_BREAK);
-	strcat(message, text);
-	sprintf(text, "%s: %s%s", HEADER_ORIGIN_SOFTWARE_NAME, app, LINE_BREAK);
-	strcat(message, text);
-	sprintf(text, "%s: %s%s", HEADER_ORIGIN_SOFTWARE_VERSION, LIBGROWL_VERSION, LINE_BREAK);
-	strcat(message, text);
-	
-	unix_get_system_name(system_name,sizeof(system_name)); /* this get back Darwin not macOS */
-	if (g_platform_name!=NULL) {
-		/* these 2 are optional */
-		sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_NAME, "Mac OS X", LINE_BREAK);
+	if (libgrowl_get_minimalist_mode()==FALSE) {
+		gethostname(hostname, HOST_NAME_MAX);
+		if (debug_level>=2)
+			printf("homename=%s\n", hostname);
+		sprintf(text, "%s: %s%s", HEADER_ORIGIN_MACHINE_NAME, hostname, LINE_BREAK);
 		strcat(message, text);
-		sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_VERSION, "10.13.6", LINE_BREAK);
+		sprintf(text, "%s: %s%s", HEADER_ORIGIN_SOFTWARE_NAME, app, LINE_BREAK);
 		strcat(message, text);
+		sprintf(text, "%s: %s%s", HEADER_ORIGIN_SOFTWARE_VERSION, LIBGROWL_VERSION, LINE_BREAK);
+		strcat(message, text);
+		
+		unix_get_system_name(system_name,sizeof(system_name)); /* this get back Darwin not macOS */
+		if (g_platform_name!=NULL) {
+			/* these 2 are optional */
+			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_NAME, "Mac OS X", LINE_BREAK);
+			strcat(message, text);
+			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_VERSION, "10.13.6", LINE_BREAK);
+			strcat(message, text);
+		}
 	}
 	sprintf(text, "%s: %s%s", HEADER_APPLICATION_NAME, app, LINE_BREAK);
 	strcat(message, text);

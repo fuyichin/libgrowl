@@ -35,19 +35,38 @@ int main(int argc, char *argv[])
 				libgrowl_set_debug_level(2);
 				continue;
 			}
+			else if (strcmp(argv[i],"-h")==0 || strcmp(argv[i],"-help")==0) {
+				fprintf(stdout, 
+					"eg. growlnotify <message> [<title> <port> <application> <notification>\n"
+					"    all parameters are optional, port hard coded to 127.0.0.1, title is 'libgrowl'\n"
+					"-h, -help,  show current display message\n"
+					"-v,  verbose level 1\n"
+					"-vv,  verbose level 2\n"
+					"-minimalist,  enable minimalist mode\n"
+					);
+				return 0;
+			}
+			else if (strcmp(argv[i],"-minimalist")==0) {
+				fprintf(stdout, "set minimalist TRUE (defualt is %d)\n", libgrowl_get_minimalist_mode());
+				libgrowl_set_minimalist_mode(!0);  /* true */
+				continue;
+			}
 			else if (argv[i][0]=='-')
 				continue;
 			
 			counter++;
 			switch(counter) {
 				case 1:
-					printf("case 1:i=%d\n", i);
+					printf("case 1:set title=text/message\n");
 					/* puts(argv[1]); */
 					title= argv[i];
 					text= "";
 					break;
 				case 2:
-					text= argv[i];
+					title= argv[i];
+					if (i>1)
+						text= argv[i-1];
+					printf("case 2:set <message>(%s) <title>(%s)\n", text, title);
 					break;
 				case 3:
 					port_str= argv[i];

@@ -10,7 +10,7 @@
 #endif /* libgrowl_h */
 
 #define GROWL_DEFAULT_PORT 23053
-#define LIBGROWL_VERSION  "0.1.0"
+#define LIBGROWL_VERSION  "0.1"
 
 #define ENCRYPTION_NONE  "NONE"
 #define GNTP_VERSION  "GNTP/1.0"
@@ -47,5 +47,7 @@
 #define MESSAGETYPE_REGISTER  "REGISTER"
 
 void libgrowl_set_debug_level(int);
+void libgrowl_set_minimalist_mode(int);
+int libgrowl_get_minimalist_mode(void);
 int growl_register_notifications(char *, char **);
 int growl_send_notification(char *, char *, char *, char *);

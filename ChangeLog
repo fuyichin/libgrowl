@@ -1,7 +1,4 @@
 # date '+%A %B %m %Y'
 * Sat Feb 06 2021  fuyichin<fuyichin@gmail.com>
-- update debug_level defination
-- new function: gntp_get_header_value(), return the header value from GNTP
-- test cases for gntp_get_header_value()
-- fix run_test_case issue in Makefile
-- add in VSCode setting file
+- enable minimalist mode
+- make some changes in growlnotify <message> and <title> parameters.

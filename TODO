@@ -1,6 +1,9 @@
 TODO
 =====
 
+(v) working
+(x) done
+
 Xcode
 =====
 
@@ -12,9 +15,9 @@ Unix/Linux
 libgrowl
 =====
 
-* When server reply with error, show what is the error.
+* When server reply with error, shows what is the error.
 
-* What is the minimalist of GNTP header?
+* (v) What is the minimalist of GNTP header?
 
 * Retrieve platform name and version.
 
@@ -22,7 +25,7 @@ libgrowl
 
 * Can use machine name as ip eg. "localhost" to replace '127.0.0.1"
 
-* function: char *gntp_get_header_value(
+* (x) function: char *gntp_get_header_value(
 	return_value, 
 	sizeof(return_value),
 	header-code,
