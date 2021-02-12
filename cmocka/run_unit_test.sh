@@ -13,5 +13,6 @@ do
 	fi
 done
 
+echo "Note: 1 test program may contains more than 1 test case."
 echo "$total_test_program program(s) run:"
-echo "$fail_count program(s) fail. \nNote: 1 test program may contains more than 1 test case."
+echo "$fail_count program(s) fail. "

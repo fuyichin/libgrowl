@@ -1,4 +1,4 @@
 # date '+%A %B %m %Y'
-* Sat Feb 06 2021  fuyichin<fuyichin@gmail.com>
-- enable minimalist mode
-- make some changes in growlnotify <message> and <title> parameters.
+* Fri Feb 12 2021  fuyichin<fuyichin@gmail.com>
+- allow to change host and port, the host can be name or ip
+- just tested on macOS

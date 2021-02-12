@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	char *notification= "libgrowl";
 	char **notifications;
 	int status;
-	char *title, *text, *port_str;
+	char *title, *text, *host_str;
 	
 	/* process parameters */
 	libgrowl_set_debug_level(0);
@@ -69,7 +69,8 @@ int main(int argc, char *argv[])
 					printf("case 2:set <message>(%s) <title>(%s)\n", text, title);
 					break;
 				case 3:
-					port_str= argv[i];
+					host_str= argv[i];
+					libgrowl_set_growl_server(host_str);
 					break;
 				case 4:
 					application= argv[i];

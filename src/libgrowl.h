@@ -49,5 +49,6 @@
 void libgrowl_set_debug_level(int);
 void libgrowl_set_minimalist_mode(int);
 int libgrowl_get_minimalist_mode(void);
+void libgrowl_set_growl_server(char *);
 int growl_register_notifications(char *, char **);
 int growl_send_notification(char *, char *, char *, char *);

@@ -14,6 +14,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h> /* inet_addr */
+#include <netdb.h> /* macos? */
 #include "libgrowl.h"
 
 #ifndef HOST_NAME_MAX
@@ -39,8 +40,9 @@ struct gntp_message {
 };
 
 static int debug_level= 1;  /* 0-no debug, 1,2 simple info, 3-for developers */
-static char *g_host= "127.0.0.1"; /* localhost */
+static char *g_host= "127.0.0.1"; /* localhost:port */
 static int g_port= GROWL_DEFAULT_PORT; /* GROWL_DEFAULT_PORT */
+static char *g_host_name="", *g_host_ip= "127.0.0.1";
 static int g_minimalist_mode= MINIMALIST_GROWL;
 static char *g_platform_name= NULL;
 
@@ -66,6 +68,16 @@ char *libgrowl_get_host(void)
 	return g_host; /* can I do like this? */
 }
 
+char *libgrowl_get_host_ip(void) /* this one not used anymore? */
+{
+	return g_host_ip;
+}
+
+int libgrowl_get_port(void)
+{
+	return g_port;
+}
+
 void libgrowl_set_minimalist_mode(int mode)
 {
 	g_minimalist_mode= mode;
@@ -74,6 +86,51 @@ void libgrowl_set_minimalist_mode(int mode)
 int libgrowl_get_minimalist_mode(void)
 {
 	return g_minimalist_mode;
+}
+
+/**
+ *  set growl server name eg. 127.0.0.1, localhost:23053, 127.0.0.1:23053
+ *  @author  <a href="mailto:fuyichin@gmail.com">hooichee</a>
+ *  @param name  server host name, ip or ip:port
+ */
+void libgrowl_set_growl_server(char *name)
+{
+	static char port[15+1]= "";
+	static char host[40+1]= "";
+//	char *sample= "127.0.0.1:23053";
+	char *scanner=name+strlen(name);
+	int  len= 0;
+
+	while (scanner!=name) {
+		/* scan from the back */
+		if ((*scanner)==':' && len>0) {
+			strcpy(port,scanner+1);
+			len= 0; /* reset for host name */
+			}
+		len++;
+		scanner--;
+		}
+//	printf("%d\n", len);
+	memset(host, 0, sizeof(host));
+	strncpy(host,name,len);
+//	puts(port);
+//	puts(host);
+
+	/* if host is not ip, convert to ip */
+{
+	/* this works for macos */
+	struct hostent *hp= gethostbyname(host);
+	if (hp!=NULL) {
+		strcpy(host, inet_ntoa(*(struct in_addr*)(hp->h_addr_list[0])));
+	}
+}
+	
+//	g_host_ip= host;
+	g_host= host;
+	if (port[0]=='\0')
+		g_port= GROWL_DEFAULT_PORT;
+	else
+		g_port= atoi(port);
 }
 
 /* this infomration retrieve information from unix kernet
@@ -376,7 +433,8 @@ int growl_register_notifications(char *app, char **notifications)
 	}
 	
 	/* send package */
-	status= gntp_send(message, (int)strlen(message), g_host, g_port, text, sizeof(text));
+	status= gntp_send(message, (int)strlen(message), 
+		libgrowl_get_host(), libgrowl_get_port(), text, sizeof(text));
 	if (status!=0) /* error */
 		return 0;
 	

@@ -15,13 +15,13 @@ Unix/Linux
 libgrowl
 =====
 
-* When server reply with error, shows what is the error.
+* ( ) [gntp_return_error] When server reply with error, shows what is the error.
 
-* (v) What is the minimalist of GNTP header?
+* (x) What is the minimalist of GNTP header?
 
 * Retrieve platform name and version.
 
-* Can change ip and port
+* (v) [change_host] Can change ip and port
 
 * Can use machine name as ip eg. "localhost" to replace '127.0.0.1"
 

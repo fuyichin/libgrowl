@@ -6,7 +6,8 @@ CMOCKA_LIB_PATH=/usr/local/lib
 program=gntp_decode_reply_test \
 gntp_get_header_value_test \
 check_default_setting_test \
-libgrowl_minimalist_mode_test
+libgrowl_minimalist_mode_test \
+libgrowl_set_growl_server_test
 
 all: $(program)
 
@@ -24,6 +25,9 @@ gntp_get_header_value_test: gntp_get_header_value_test.o libgrowl.o
 
 libgrowl_minimalist_mode_test: libgrowl_minimalist_mode_test.o libgrowl.o
 	$(CC) -o libgrowl_minimalist_mode_test libgrowl_minimalist_mode_test.o libgrowl.o -L$(CMOCKA_LIB_PATH) -lcmocka
+
+libgrowl_set_growl_server_test: libgrowl_set_growl_server_test.o libgrowl.o
+	$(CC) -o libgrowl_set_growl_server_test libgrowl_set_growl_server_test.o libgrowl.o -L$(CMOCKA_LIB_PATH) -lcmocka
 
 test: $(program)
 # run unit test
