@@ -45,8 +45,11 @@
 #define LINE_BREAK  "\r\n" /* line break */
 #define MESSAGETYPE_NOTIFY  "NOTIFY"
 #define MESSAGETYPE_REGISTER  "REGISTER"
+#define HEADER_ERROR_CODE  "Error-Code" /* server reply */
+#define HEADER_ERROR_DESCRIPTION  "Error-Description"
 
 void libgrowl_set_debug_level(int);
+int libgrowl_get_debug_level(void);
 void libgrowl_set_minimalist_mode(int);
 int libgrowl_get_minimalist_mode(void);
 void libgrowl_set_growl_server(char *);

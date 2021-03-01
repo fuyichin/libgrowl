@@ -2,5 +2,5 @@ a.out
 *.[o,so,a,lib,dylib]
 build/
 .DS_Store
-example/growlnotify
+examples/growlnotify
 cmocka/*_test

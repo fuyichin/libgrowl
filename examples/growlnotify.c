@@ -35,6 +35,10 @@ int main(int argc, char *argv[])
 				libgrowl_set_debug_level(2);
 				continue;
 			}
+			else if (strcmp(argv[i],"-vvv")==0) {
+				libgrowl_set_debug_level(3);
+				continue;
+			}
 			else if (strcmp(argv[i],"-h")==0 || strcmp(argv[i],"-help")==0) {
 				fprintf(stdout, 
 					"eg. growlnotify <message> [<title> <port> <application> <notification>\n"
@@ -57,7 +61,8 @@ int main(int argc, char *argv[])
 			counter++;
 			switch(counter) {
 				case 1:
-					printf("case 1:set title=text/message\n");
+					if (libgrowl_get_debug_level()>=1)
+						printf("case 1:set title=text/message\n");
 					/* puts(argv[1]); */
 					title= argv[i];
 					text= "";
@@ -66,7 +71,8 @@ int main(int argc, char *argv[])
 					title= argv[i];
 					if (i>1)
 						text= argv[i-1];
-					printf("case 2:set <message>(%s) <title>(%s)\n", text, title);
+					if (libgrowl_get_debug_level()>=1)
+						printf("case 2:set <message>(%s) <title>(%s)\n", text, title);
 					break;
 				case 3:
 					host_str= argv[i];

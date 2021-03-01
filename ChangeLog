@@ -1,4 +1,5 @@
 # date '+%A %B %m %Y'
-* Fri Feb 12 2021  fuyichin<fuyichin@gmail.com>
-- allow to change host and port, the host can be name or ip
-- just tested on macOS
+* Mon Mar 01 2021  fuyichin<fuyichin@gmail.com>
+- reformat Readme.md
+- display gntp return error code and description (verbose mode)
+- growlnotify, simple cosmetic change

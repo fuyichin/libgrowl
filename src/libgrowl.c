@@ -97,7 +97,7 @@ void libgrowl_set_growl_server(char *name)
 {
 	static char port[15+1]= "";
 	static char host[40+1]= "";
-//	char *sample= "127.0.0.1:23053";
+/*	char *sample= "127.0.0.1:23053"; */
 	char *scanner=name+strlen(name);
 	int  len= 0;
 
@@ -110,11 +110,8 @@ void libgrowl_set_growl_server(char *name)
 		len++;
 		scanner--;
 		}
-//	printf("%d\n", len);
 	memset(host, 0, sizeof(host));
 	strncpy(host,name,len);
-//	puts(port);
-//	puts(host);
 
 	/* if host is not ip, convert to ip */
 {
@@ -125,8 +122,8 @@ void libgrowl_set_growl_server(char *name)
 	}
 }
 	
-//	g_host_ip= host;
 	g_host= host;
+	g_host_name= g_host; /* not used */
 	if (port[0]=='\0')
 		g_port= GROWL_DEFAULT_PORT;
 	else
@@ -258,7 +255,7 @@ int gntp_send(char *data, int d_size, char *host, int port, char *reply, int rep
 	struct sockaddr_in addr;
 	
 	struct gntp_message gntp_reply;
-	char server_reply[2000];
+	char server_reply[2000], tmp_reply[2000];
 	int return_status= 0; /* 0-sucess */
 	
 	/* create socket */
@@ -325,15 +322,22 @@ int gntp_send(char *data, int d_size, char *host, int port, char *reply, int rep
 	if (debug_level>=2) {
 		fprintf(stdout, "[%s]\n", server_reply);
 	}
-	
-	gntp_decode_reply(server_reply,&gntp_reply);
+
+	strcpy(tmp_reply,server_reply); /* gntp_decode_reply will change the value of server_reply */	
+	gntp_decode_reply(tmp_reply,&gntp_reply);
 	if (gntp_reply.status==GNTP_OK) {
 		if (debug_level>=1)
 			fprintf(stdout, "gntp reply success.\n");
 	}
 	else {
-		if (debug_level>=1)
+		if (debug_level>=1) {
 			fprintf(stdout, "gntp reply fail.\n");
+			/* print error code and reason */
+			fprintf(stdout,
+				"GNTP error code: %s\n", gntp_get_header_value(data,d_size,HEADER_ERROR_CODE,server_reply));
+			fprintf(stdout,
+				"Description: %s\n", gntp_get_header_value(data,d_size,HEADER_ERROR_DESCRIPTION,server_reply));
+		}
 		return_status= -1;
 	}
 	close(sockfd);
