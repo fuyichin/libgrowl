@@ -351,6 +351,51 @@ void gntp_format_register_message(char *msg, int msg_size, char *app, char **nam
 	printf("name=%s", str);
 }
 
+/* this is for mac os, bsd platform */
+/**
+ *  @brief  get the platfrom name and version info
+*/
+void bsd_get_platform_name_version(char *platform, char *version)
+{
+    char cmd[64];
+    FILE* stdoutFile;
+
+#ifdef _LINUX
+	sprintf(cmd, "uname -s");
+#else
+	sprintf(cmd, "sw_vers -productName");
+#endif
+    stdoutFile = popen(cmd, "r") ;
+    if (stdoutFile!=NULL) {
+        char buff[16] ;
+        char *out = fgets(buff, sizeof(buff), stdoutFile) ;
+        pclose(stdoutFile) ;
+		/* sscanf(out, "%s", platform); */
+		/* debug */
+		if (out)
+			strcpy(platform,out);
+		if (platform[strlen(platform)-1]=='\n')
+			platform[strlen(platform)-1]='\0';
+    }
+
+#ifdef _LINUX
+	sprintf(cmd, "uname -r");
+#else
+    sprintf(cmd, "sw_vers -productVersion");
+#endif
+    stdoutFile = popen(cmd, "r") ;
+    if (stdoutFile) {
+        char buff[16] ;
+        char *out = fgets(buff, sizeof(buff), stdoutFile) ;
+        pclose(stdoutFile) ;
+
+        if (out)
+			strcpy(version,out);
+		if (version[strlen(version)-1]=='\n')
+			version[strlen(version)-1]='\0';
+    }
+}
+
 /**
  *  register growl notification(s)
  *  @author  <a href="mailto:fuyichin@gmail.com">hooichee</a>
@@ -363,7 +408,6 @@ int growl_register_notifications(char *app, char **notifications)
 	char message[800]; /* package message */
 	char text[800]; /* tmp buffer, use for return status as well */
 	char hostname[HOST_NAME_MAX];
-	char system_name[80];
 	int notification_count= get_string_array_size(notifications);
 	int i, status;
 	
@@ -384,6 +428,8 @@ int growl_register_notifications(char *app, char **notifications)
 	sprintf(text, "%s %s %s%s", GNTP_VERSION, MESSAGETYPE_REGISTER, ENCRYPTION_NONE, LINE_BREAK);
 	strcat(message, text);
 	if (libgrowl_get_minimalist_mode()==FALSE) {
+		char system_name[80], system_version[80];
+
 		gethostname(hostname, HOST_NAME_MAX);
 		if (debug_level>=2)
 			printf("homename=%s\n", hostname);
@@ -393,13 +439,17 @@ int growl_register_notifications(char *app, char **notifications)
 		strcat(message, text);
 		sprintf(text, "%s: %s%s", HEADER_ORIGIN_SOFTWARE_VERSION, LIBGROWL_VERSION, LINE_BREAK);
 		strcat(message, text);
-	
-		unix_get_system_name(system_name,sizeof(system_name));
+
+		strcpy(system_name, "unknown"); /* initialize */
+		strcpy(system_version, "unknown");
+		/* unix_get_system_name(system_name,sizeof(system_name));  */ /* this get back Darwin not macOS */
+		bsd_get_platform_name_version(system_name,system_version); /* bsd/macos only? */
+		g_platform_name= system_name;
 		if (g_platform_name!=NULL) {
 			/* these 2 are optional */
-			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_NAME, "Mac OS X", LINE_BREAK);
+			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_NAME, system_name, LINE_BREAK);
 			strcat(message, text);
-			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_VERSION, "10.13.6", LINE_BREAK);
+			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_VERSION, system_version, LINE_BREAK);
 			strcat(message, text);
 			}
 		}
@@ -459,7 +509,6 @@ int growl_send_notification(char *app, char *notification, char *title, char *co
 	char message[800]; /* package message */
 	char text[800]; /* tmp buffer, use for return status as well */
 	char hostname[HOST_NAME_MAX];
-	char system_name[80];
 	int status;
 	
 	/* print all notification name */
@@ -472,6 +521,8 @@ int growl_send_notification(char *app, char *notification, char *title, char *co
 	sprintf(text, "%s %s %s%s", GNTP_VERSION, MESSAGETYPE_NOTIFY, ENCRYPTION_NONE, LINE_BREAK);
 	strcat(message, text);
 	if (libgrowl_get_minimalist_mode()==FALSE) {
+		char system_name[80], system_version[80];
+
 		gethostname(hostname, HOST_NAME_MAX);
 		if (debug_level>=2)
 			printf("homename=%s\n", hostname);
@@ -482,12 +533,17 @@ int growl_send_notification(char *app, char *notification, char *title, char *co
 		sprintf(text, "%s: %s%s", HEADER_ORIGIN_SOFTWARE_VERSION, LIBGROWL_VERSION, LINE_BREAK);
 		strcat(message, text);
 		
-		unix_get_system_name(system_name,sizeof(system_name)); /* this get back Darwin not macOS */
+
+		strcpy(system_name, "unknown"); /* initialize */
+		strcpy(system_version, "unknown");
+		/* unix_get_system_name(system_name,sizeof(system_name)); */ /* this get back Darwin not macOS */
+		bsd_get_platform_name_version(system_name,system_version); /* bsd/macos only? */
+		g_platform_name= system_name;
 		if (g_platform_name!=NULL) {
 			/* these 2 are optional */
-			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_NAME, "Mac OS X", LINE_BREAK);
+			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_NAME, system_name, LINE_BREAK); /* Mac OS X */
 			strcat(message, text);
-			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_VERSION, "10.13.6", LINE_BREAK);
+			sprintf(text, "%s: %s%s", HEADER_ORIGIN_PLATFORM_VERSION, system_version, LINE_BREAK); /* 10.13.6 */
 			strcat(message, text);
 		}
 	}

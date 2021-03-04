@@ -23,13 +23,26 @@ eg. Required header missing (Notification-Title)
 * (x) output case 1: case 2: with -v(verbose) only
       message 'port hard code' ot 'host hard code'
 
-* Retrieve platform name and version.
+* (v) Retrieve platform name and version.
+    ( ) use uname command for Linux, just a temporary solution. uname retrieve the kernal name not platform name.
 
 * (x) [change_host] Can change ip and port
 
 * (x) Can use machine name as ip eg. "localhost" to replace '127.0.0.1"
 
+* ( ) send url link
+
+* ( ) send icon/picture (gntp-send can send image)
+    $ gntp-send 'title' 'message' [Growl.png]
+
 * document for developer to setup Growl environment (Mac, Linux, Windows)
+
+* ( ) notification type (eg. download complete)
+Note: follow libgrowl(java)
+
+* ( ) support url
+
+* ( ) support passwrod
 
 growlnotify
 =====

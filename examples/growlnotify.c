@@ -41,8 +41,9 @@ int main(int argc, char *argv[])
 			}
 			else if (strcmp(argv[i],"-h")==0 || strcmp(argv[i],"-help")==0) {
 				fprintf(stdout, 
-					"eg. growlnotify <message> [<title> <port> <application> <notification>\n"
-					"    all parameters are optional, port hard coded to 127.0.0.1, title is 'libgrowl'\n"
+					"eg. growlnotify <title>/<message> [<title> <host>[:<port>] <application> <notification>\n"
+					"eg. growlnotify 'Hello, world' libgrowl localhost\n"
+					"    all parameters are optional, <host> default is 127.0.0.1, title is 'libgrowl'\n"
 					"-h, -help,  show current display message\n"
 					"-v,  verbose level 1\n"
 					"-vv,  verbose level 2\n"
