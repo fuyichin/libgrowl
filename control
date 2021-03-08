@@ -1,0 +1,9 @@
+Package: libgrowl-dev
+Version: 0.1.0
+Section: devel
+Priority: optional
+Installed-Size: 45
+Maintainer: fuyichin <fuyichin@gmail.com>
+Architecture: i386
+Description: libgrowl library
+ library to send growl notification message

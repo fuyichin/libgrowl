@@ -1,4 +1,3 @@
-# date '+%A %B %m %Y'
-* Thu Mar 04 2021  fuyichin<fuyichin@gmail.com>
-- growlnotify, simple cosmetic change
-- get platform name. eg. Mac OS X
+# date '+%A %B %d %Y'
+* Monday March 08 2021  fuyichin<fuyichin@gmail.com>
+- add debian package

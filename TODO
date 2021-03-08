@@ -23,7 +23,7 @@ eg. Required header missing (Notification-Title)
 * (x) output case 1: case 2: with -v(verbose) only
       message 'port hard code' ot 'host hard code'
 
-* (v) Retrieve platform name and version.
+* (x) Retrieve platform name and version.
     ( ) use uname command for Linux, just a temporary solution. uname retrieve the kernal name not platform name.
 
 * (x) [change_host] Can change ip and port
@@ -38,11 +38,17 @@ eg. Required header missing (Notification-Title)
 * document for developer to setup Growl environment (Mac, Linux, Windows)
 
 * ( ) notification type (eg. download complete)
-Note: follow libgrowl(java)
+Note: follow libgrowl(java) NotificationType.java
+A notification type groups all the similar notifications of your application.
+eg. you may need a "download started" and "download finished" notification
 
 * ( ) support url
 
-* ( ) support passwrod
+* ( ) support password
+
+* (v) add debian package in Makefile
+
+* (v) pkg-config.pc
 
 growlnotify
 =====
