@@ -10,11 +10,12 @@ test:
 
 deb: control src/libgrowl.h src/libgrowl.a
 	install -d /tmp/$(package)/DEBIAN
-	install -d /tmp/$(package)/usr/lib
+	install -d /tmp/$(package)/usr/lib/pkgconfig
 	install -d /tmp/$(package)/usr/include
 	install src/libgrowl.h /tmp/$(package)/usr/include/.
 	install src/libgrowl.a /tmp/$(package)/usr/lib/.
 	install control /tmp/$(package)/DEBIAN/.
+	install libgrowl.pc /tmp/$(package)/usr/lib/pkgconfig/.
 	dpkg -b /tmp/$(package) $(package)-$(version).deb
 
 clean:

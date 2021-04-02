@@ -1,5 +1,5 @@
 /**
- * libgrowl.c
+ * @file libgrowl.c
  * @author hooichee<fuyichin@gmail.com>
  *
  *  Created by Chin Hooi Chee on 2/5/21.

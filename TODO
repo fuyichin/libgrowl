@@ -46,9 +46,19 @@ eg. you may need a "download started" and "download finished" notification
 
 * ( ) support password
 
-* (v) add debian package in Makefile
+* (x) add debian package in Makefile
 
-* (v) pkg-config.pc
+* (x) pkg-config.pc
+
+* ( ) Makefile install -d /usr/local/lib ==> /usr/local/lib/pkgconfig
+
+* (v) Doxygen.
+  add doxygen config file.
+  add @file at the beginning of the file to be appeared in doxygen eg.
+  /**
+   * @file libgrowl.c
+   * @author hooichee<fuyichin@gmail.com>
+   */
 
 growlnotify
 =====
