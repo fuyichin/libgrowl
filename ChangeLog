@@ -1,3 +1,4 @@
 # date '+%A %B %d %Y'
-* Friday April 02 2021  fuyichin<fuyichin@gmail.com>
-- add doxygen
+* Monday June 07 2021  fuyichin<fuyichin@gmail.com>
+- change DEBIAN info
+- add checksum, but seems like checksum is automatically included

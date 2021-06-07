@@ -16,6 +16,7 @@ deb: control src/libgrowl.h src/libgrowl.a
 	install src/libgrowl.a /tmp/$(package)/usr/lib/.
 	install control /tmp/$(package)/DEBIAN/.
 	install libgrowl.pc /tmp/$(package)/usr/lib/pkgconfig/.
+	# cd /tmp/$(package) && find usr -type f -exec md5sum {} \; > /tmp/$(package)/DEBIAN/md5sums
 	dpkg -b /tmp/$(package) $(package)-$(version).deb
 
 clean:

@@ -1,8 +1,7 @@
 Package: libgrowl-dev
 Version: 0.1.0
-Section: devel
-Priority: optional
-Installed-Size: 45
+Section: libdevel
+Priority: extra
 Maintainer: fuyichin <fuyichin@gmail.com>
 Architecture: i386
 Description: libgrowl library

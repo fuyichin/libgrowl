@@ -47,6 +47,7 @@ eg. you may need a "download started" and "download finished" notification
 * ( ) support password
 
 * (x) add debian package in Makefile
+      (x) add checksum
 
 * (x) pkg-config.pc
 
