@@ -61,6 +61,8 @@ eg. you may need a "download started" and "download finished" notification
    * @author hooichee<fuyichin@gmail.com>
    */
 
+* (x) Linux. sh: 1: sw_vers: not found.
+
 growlnotify
 =====
 

@@ -74,6 +74,34 @@ POSIX: _POSIX
 
     $ gcc -D_Darwin -c libgrowl.c
 
+Linux
+-----
+To retrieve platform name from Linux:
+#include <stdio.h>
+#include <sys/utsname.h>
+#include <stdlib.h>
+
+int main()
+{
+	struct utsname name;
+	if(uname(&name)) exit(-1);
+	printf("Your computer's OS is %s@%s\n", name.sysname, name.release);
+	return 0;
+}
+
+or
+
+#include <stdio.h>
+
+int main(int argc,char *argv[]){    
+    FILE* file = popen("uname -s", "r");
+    char buffer[100];
+    fscanf(file, "%100s", buffer);
+    pclose(file);
+    printf("buffer is :%s\n", buffer);
+    return 0;
+}
+
 Test: cmocka
 -----
 Use cmocka as testing framework, as cmocka is simple and lightweight

@@ -361,16 +361,27 @@ void bsd_get_platform_name_version(char *platform, char *version)
     FILE* stdoutFile;
 
 #ifdef _LINUX
+	if (debug_level>=1)
+		printf("This is Linux\n");
 	sprintf(cmd, "uname -s");
 #else
-	sprintf(cmd, "sw_vers -productName");
+	if (debug_level>=1)
+		printf("This is NOT Linux\n");
+	sprintf(cmd, "sw_vers -productName");  /* for mac os */
 #endif
     stdoutFile = popen(cmd, "r") ;
     if (stdoutFile!=NULL) {
-        char buff[16] ;
-        char *out = fgets(buff, sizeof(buff), stdoutFile) ;
+        char buff[16+1];
+        char *out;
+#ifdef _LINUX
+		fscanf(stdoutFile, "%16s", buff);
+		out= buff;
+#else
+        out= fgets(buff, sizeof(buff), stdoutFile) ;
+#endif
         pclose(stdoutFile) ;
 		/* sscanf(out, "%s", platform); */
+		fprintf(stdout, "out=[%s]\n", out);
 		/* debug */
 		if (out)
 			strcpy(platform,out);
@@ -385,10 +396,15 @@ void bsd_get_platform_name_version(char *platform, char *version)
 #endif
     stdoutFile = popen(cmd, "r") ;
     if (stdoutFile) {
-        char buff[16] ;
-        char *out = fgets(buff, sizeof(buff), stdoutFile) ;
+        char buff[16+1];
+        char *out;
+#ifdef _LINUX
+        fscanf(stdoutFile, "%16s", buff);
+        out= buff;
+#else
+        out = fgets(buff, sizeof(buff), stdoutFile) ;
         pclose(stdoutFile) ;
-
+#endif
         if (out)
 			strcpy(version,out);
 		if (version[strlen(version)-1]=='\n')
