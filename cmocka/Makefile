@@ -13,7 +13,7 @@ bsd_get_platform_name_test \
 all: $(program)
 
 libgrowl.o: ../src/libgrowl.c
-	$(CC) -c ../src/libgrowl.c -I../src
+	$(CC) $(CFLAGS) -c ../src/libgrowl.c -I../src
 
 gntp_decode_reply_test: gntp_decode_reply_test.o libgrowl.o
 	$(CC) -o gntp_decode_reply_test gntp_decode_reply_test.o libgrowl.o -L$(CMOCKA_LIB_PATH) -lcmocka

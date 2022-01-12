@@ -6,9 +6,12 @@ xcode: macOS build tools
 vscode: vscode.
 document: documentation.
 
-[ ] cr1. cmocka. bsd_get_platform_name_test fail. A different platform name on Big Sur 11.6.
+[x] cr1. cmocka. bsd_get_platform_name_test fail. A different platform name on Big Sur 11.6.
   description: The platform name retrieve from sw_vers has changed to 'macOS' since Mac OS 11, compare with the previous 'Mac OS X'
   solution: to implement -D_macOS in compile time?
 cr2. document. Fix Readme.md file for Linux pandoc Latex. '==>'
   Still working if output with othe application.
 cr3. cmocka. run_unit_test.sh only process the first parameter
+[x] cr4. cmocka. CFLAGS not inlcuded in the compile for libgrowl.c
+libgrowl.o: ../src/libgrowl.c
+	$(CC) -c ../src/libgrowl.c -I../src  # <== missing CFLAGS 
