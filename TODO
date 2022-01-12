@@ -26,6 +26,15 @@ eg. Required header missing (Notification-Title)
 * (x) Retrieve platform name and version.
     ( ) use uname command for Linux, just a temporary solution. uname retrieve the kernal name not platform name.
 
+* ( ) cmocka/bsd_get_platform_name_test.c
+  test case fail, because before macOS product name has changed from 'Mac OS X' to 'Mac OS'
+  $ sw_vers -productNam
+  High Sierra:'Mac OS X'
+  Big Sub: 'macOS'
+  Solution: implement _macOS in compile time?
+  $ ./config.guess 
+  ==> i386-apple-darwin20.6.0
+
 * (x) [change_host] Can change ip and port
 
 * (x) Can use machine name as ip eg. "localhost" to replace '127.0.0.1"
@@ -41,8 +50,6 @@ eg. Required header missing (Notification-Title)
 Note: follow libgrowl(java) NotificationType.java
 A notification type groups all the similar notifications of your application.
 eg. you may need a "download started" and "download finished" notification
-
-* ( ) support url
 
 * ( ) support password
 
@@ -61,12 +68,25 @@ eg. you may need a "download started" and "download finished" notification
    * @author hooichee<fuyichin@gmail.com>
    */
 
-* (x) Linux. sh: 1: sw_vers: not found.
+* ( ) Fix the testing script cmocka/run_unit_test.sh
+for prog in $1 ==> for prog in $@
+
+* ( ) Fix Readme.md
+  '==>' unable to be processed by Latex (for Linux pandoc) to convert to PDF
+  add ``` to the program code
+  consider adding the below
+---
+title: "Readme for libgrowl"
+author: Chin HC
+date: Jan 7, 2022
+geometry: margin=2cm
+---
+
 
 growlnotify
 =====
 
-* print help message
+* (x) print help message
 
 VSCode
 =====
