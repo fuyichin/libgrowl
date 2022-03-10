@@ -30,10 +30,13 @@ eg. Required header missing (Notification-Title)
   test case fail, because before macOS product name has changed from 'Mac OS X' to 'Mac OS'
   $ sw_vers -productNam
   High Sierra:'Mac OS X'
-  Big Sub: 'macOS'
-  Solution: implement _macOS in compile time?
+  Big Sur: 'macOS'
+  Solution: 
+  1. implement _macOS in compile time?
   $ ./config.guess 
   ==> i386-apple-darwin20.6.0
+  2. accept 'Mac OS X' or 'macOS' as results
+    assert_true(strcmp("macOS",platform_name)==0 || strcmp("Mac OS X",platform_name)==0);
 
 * (x) [change_host] Can change ip and port
 
@@ -73,6 +76,7 @@ for prog in $1 ==> for prog in $@
 
 * ( ) Fix Readme.md
   '==>' unable to be processed by Latex (for Linux pandoc) to convert to PDF
+  use $ sed to sed s/\⇒/==>/ README.md1
   add ``` to the program code
   consider adding the below
 ---
@@ -82,6 +86,16 @@ date: Jan 7, 2022
 geometry: margin=2cm
 ---
 
+* ( ) add CFLAGS in all Makefiles (src example cmocka) 
+  eg. in Linux compiler doesn't includes -D_LINUX, results error
+  $(CC) -c $(CFLAGS)
+
+* ( ) use CC ?= gcc in Makefile. for $ CC="tcc" make
+
+* ( ) remove warning when compile in Linux
+  eg. libgrowl.c:397:16: warning: assignment to ‘FILE *’, 
+      stdoutFile = popen(cmd, "r") ;
+  remove '-ansi' compiler option from gcc
 
 growlnotify
 =====

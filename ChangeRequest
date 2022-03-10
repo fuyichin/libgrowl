@@ -15,3 +15,4 @@ cr3. cmocka. run_unit_test.sh only process the first parameter
 [x] cr4. cmocka. CFLAGS not inlcuded in the compile for libgrowl.c
 libgrowl.o: ../src/libgrowl.c
 	$(CC) -c ../src/libgrowl.c -I../src  # <== missing CFLAGS 
+[x] cr5. review TODO, add new solutions. eg. check platform name in test case.
