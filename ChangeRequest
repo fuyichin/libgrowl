@@ -16,3 +16,4 @@ cr3. cmocka. run_unit_test.sh only process the first parameter
 libgrowl.o: ../src/libgrowl.c
 	$(CC) -c ../src/libgrowl.c -I../src  # <== missing CFLAGS 
 [x] cr5. review TODO, add new solutions. eg. check platform name in test case.
+[x] cr6. cmocka. libgrowl. Fix test_bsd_get_platform_name_version(). Big Sur return 'macOS', older version return 'Mac OS X'.

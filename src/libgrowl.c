@@ -377,8 +377,9 @@ void bsd_get_platform_name_version(char *platform, char *version)
 		fscanf(stdoutFile, "%16s", buff);
 		out= buff;
 #else
-        out= fgets(buff, sizeof(buff), stdoutFile) ;
+        out= fgets(buff, sizeof(buff), stdoutFile);  /* a NL at last char */
 #endif
+		out[strcspn(out, "\n")] = 0;  /* remove NL at the end */
         pclose(stdoutFile) ;
 		/* sscanf(out, "%s", platform); */
 		fprintf(stdout, "out=[%s]\n", out);

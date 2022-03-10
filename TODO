@@ -26,7 +26,7 @@ eg. Required header missing (Notification-Title)
 * (x) Retrieve platform name and version.
     ( ) use uname command for Linux, just a temporary solution. uname retrieve the kernal name not platform name.
 
-* ( ) cmocka/bsd_get_platform_name_test.c
+* (x) cmocka/bsd_get_platform_name_test.c
   test case fail, because before macOS product name has changed from 'Mac OS X' to 'Mac OS'
   $ sw_vers -productNam
   High Sierra:'Mac OS X'

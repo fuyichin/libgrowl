@@ -70,7 +70,8 @@ Compiler preprocessor?
 -----
 Specific code the following platform use the following predefine value  
 macOS: _Darwin  
-POSIX: _POSIX  
+POSIX: _POSIX
+Linux: _LINUX or _LinuxOS
 
     $ gcc -D_Darwin -c libgrowl.c
 
