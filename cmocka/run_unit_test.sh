@@ -3,7 +3,13 @@
 fail_count=0
 total_test_program=0
 
-for prog in $1
+if [ $# -gt 0 ]; then
+	programs=$@
+else
+	programs=`ls *_test`
+fi
+
+for prog in $programs
 do
 	echo "execute $prog"
 	total_test_program=`expr $total_test_program + 1`

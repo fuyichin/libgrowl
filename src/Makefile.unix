@@ -1,0 +1,16 @@
+CC = gcc
+CFLAGS = -Wall -g 
+# os_cpp -D_Darwin for macOS, -D_LINUX for Linux
+os_cpp = `if [ -x ../myconfig_guess ]; then ../myconfig_guess --cflags; fi`
+CFLAGS += $(os_cpp)
+
+all: libgrowl.a
+
+libgrowl.a: libgrowl.o
+	ar -r libgrowl.a libgrowl.o
+
+libgrowl.o: libgrowl.c
+	$(CC) $(CFLAGS) -c -o libgrowl.o libgrowl.c
+
+clean:
+	rm -f libgrowl.o libgrowl.a

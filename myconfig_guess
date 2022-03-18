@@ -1,0 +1,42 @@
+#!/bin/sh
+# a quick hack to replace the gnu config.guess
+
+kernel=`uname -s`
+machine=`uname -m`
+if [ kernel = "Linux" ]; then
+	os=`uname -o`  # Linux only?
+fi
+version=`uname -r`
+
+#echo "${machine}-${kernel}-${os}"
+guess_name="${machine}-${kernel}-${version}"
+
+if [ -z "$mode" ]; then
+case "$1" in
+	cflags|--cflags)
+		mode="cflags"
+		;;
+	*)
+		mode="unknown"
+		;;
+esac
+fi
+
+if [ $mode = "cflags" ]; then
+	case "$guess_name" in
+		*Darwin*)
+			cflags="-D_Darwin"
+			;;
+		Linux*|*linux*)
+			cflags="-D_LINUX"
+			;;
+		*)
+			;;
+	esac
+fi
+
+if [ $mode = "cflags" ]; then
+	echo $cflags
+else
+	echo $guess_name
+fi

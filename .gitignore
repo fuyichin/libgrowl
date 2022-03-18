@@ -4,3 +4,14 @@ build/
 .DS_Store
 examples/growlnotify
 cmocka/*_test
+Makefile.in
+cmocka/Makefile.in 
+src/Makefile.in 
+examples/Makefile.in
+config.sub 
+config.guess
+compile
+install-sh 
+missing 
+depcomp 
+test-driver

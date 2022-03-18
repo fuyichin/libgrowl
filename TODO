@@ -10,10 +10,35 @@ Xcode
 Unix/Linux
 =====
 
-* automake file
+Automake
+=====
+branch: automake. Initial changes and messy
+branch: autogen. Redo for clean changes
+
+More works than expected. Break up automake into smaller task.
+* ( ) initial automake structure
+      (x) my dirty hack of config.guess myconfig_guess with --cflags
+      (v) mv all Makefile to Makefile.unix, make way for automake. Use myconfig_guess in Makefile.unix compile for Linux and macOS.
+      mv Makefile -> Makefile.unix
+      src/Makefile -> Makefile.unix
+      examples/Makefile -> Makefile.unix
+      cmocka/Makefile -> Makefile.unix
+      Note: didn't move in git repository
+      (x) autogen.sh, configure.ac, Makefile.am, use AC_CANONICAL_HOST detect platform (configure.ac) for make distcheck
+      src/Makefile.am examples/Makefile.am cmocka/Makefile.am
+      (x) make check for cmocka test cases and not installed
+      (x) make sure libgrowl.pc is installed
+      (x) make sure the follow files are in distribution $ make dist eg. myconfig_guess, libgrowl.pc
+      (x) make sure the following files are in $ make dist-all eg. cmocka/*.c, run_unix_test.sh
+
+* ( ) $ make install shouldn't install myconfig_guess  
 
 libgrowl
 =====
+
+* ( ) use -D_Darwin for macos, -D_Linux for linux
+
+* ( ) bsd_get_platform_name_version(). Unknow unix platform use "uname -s"
 
 * (x) [gntp_return_error] When server reply with error, shows what is the error.
 
@@ -26,7 +51,7 @@ eg. Required header missing (Notification-Title)
 * (x) Retrieve platform name and version.
     ( ) use uname command for Linux, just a temporary solution. uname retrieve the kernal name not platform name.
 
-* (x) cmocka/bsd_get_platform_name_test.c
+* ( ) cmocka/bsd_get_platform_name_test.c
   test case fail, because before macOS product name has changed from 'Mac OS X' to 'Mac OS'
   $ sw_vers -productNam
   High Sierra:'Mac OS X'
