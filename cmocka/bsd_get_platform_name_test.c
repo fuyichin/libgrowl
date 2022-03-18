@@ -25,7 +25,11 @@ static void test_bsd_get_platform_name_version(void **state) {
 #ifdef _LINUX
 	assert_true(strcmp("Linux",platform_name)==0);
 #else
+#ifdef _Darwin
 	assert_true(strcmp("macOS",platform_name)==0 || strcmp("Mac OS X",platform_name)==0);
+#else
+	assert_true(!0);
+#endif
 #endif
 }
 
