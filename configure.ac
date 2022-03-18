@@ -62,15 +62,15 @@ if test "x$macos_mode" = xyes; then
 	host_os=darwin
 fi
 
+echo "**os=${host_os}**"
 # if manual define host_os, no need to auto check
 if test "x$host_os" = x; then
 # check OS type
+	echo "unable to detect os, can try manual --enable-linux"
+else
 
 case "${host_os}" in
-	linux*)
-		CFLAGS="$CFLAGS -DLinuxOS"
-		;;
-	*Linux*)
+	*Linux*|*linux*)
 echo "** found Linux OS **"
 		CFLAGS="$CFLAGS -DLinuxOS -D_LINUX"
 		;;
@@ -88,6 +88,7 @@ echo "** found Darwin kernel **"
 		CFLAGS="$CFLAGS -DMacOS -DOSX -D_Darwin"
 		;;
 	*)
+echo "** unable to detect kernel, no preprocessor added **"
 		;;
 esac
 

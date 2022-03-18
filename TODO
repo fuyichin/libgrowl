@@ -17,19 +17,21 @@ branch: autogen. Redo for clean changes
 
 More works than expected. Break up automake into smaller task.
 * ( ) initial automake structure
-      (x) my dirty hack of config.guess myconfig_guess with --cflags
-      (v) mv all Makefile to Makefile.unix, make way for automake. Use myconfig_guess in Makefile.unix compile for Linux and macOS.
+      ( ) my dirty hack of config.guess myconfig_guess with --cflags
+      ( ) mv all Makefile to Makefile.unix, make way for automake. Use myconfig_guess in Makefile.unix compile for Linux and macOS.
       mv Makefile -> Makefile.unix
       src/Makefile -> Makefile.unix
       examples/Makefile -> Makefile.unix
       cmocka/Makefile -> Makefile.unix
-      Note: didn't move in git repository
-      (x) autogen.sh, configure.ac, Makefile.am, use AC_CANONICAL_HOST detect platform (configure.ac) for make distcheck
+      ( ) autogen.sh, configure.ac, Makefile.am, use AC_CANONICAL_HOST detect platform (configure.ac) for make distcheck
       src/Makefile.am examples/Makefile.am cmocka/Makefile.am
-      (x) make check for cmocka test cases and not installed
-      (x) make sure libgrowl.pc is installed
-      (x) make sure the follow files are in distribution $ make dist eg. myconfig_guess, libgrowl.pc
-      (x) make sure the following files are in $ make dist-all eg. cmocka/*.c, run_unix_test.sh
+      ( ) make check for cmocka test cases and not installed
+      ( ) make sure libgrowl.pc is installed
+      ( ) make sure the follow files are in distribution $ make dist eg. myconfig_guess, libgrowl.pc
+      ( ) make sure the following files are in $ make dist-all eg. cmocka/*.c, run_unix_test.sh
+      ( ) configure --enable-linux
+      ( ) configure --enable-macos
+      ( ) check cmocka/Makefile.unix is using myconfig.guess
 
 * ( ) $ make install shouldn't install myconfig_guess  
 

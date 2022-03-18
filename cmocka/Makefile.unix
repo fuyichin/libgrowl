@@ -1,6 +1,6 @@
 CC ?= gcc
 CFLAGS = -Wall -g
-os_cpp = `if [ -x ../config.guess ]; then ../config.guess --cflags; fi`
+os_cpp = `if [ -x ../myconfig_guess ]; then ../myconfig_guess --cflags; fi`
 CFLAGS += $(os_cpp)
 CFLAGS += -I../src
 CMOCKA_LIB_PATH=/usr/local/lib

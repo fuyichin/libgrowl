@@ -22,12 +22,13 @@ case "$1" in
 esac
 fi
 
+echo "name=$guess_name"
 if [ $mode = "cflags" ]; then
 	case "$guess_name" in
 		*Darwin*)
 			cflags="-D_Darwin"
 			;;
-		Linux*|*linux*)
+		*Linux*|*linux*)
 			cflags="-D_LINUX"
 			;;
 		*)
