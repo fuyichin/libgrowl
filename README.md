@@ -77,6 +77,7 @@ Linux: _LINUX or _LinuxOS
 
 Linux
 -----
+```
 To retrieve platform name from Linux:
 #include <stdio.h>
 #include <sys/utsname.h>
@@ -89,9 +90,9 @@ int main()
 	printf("Your computer's OS is %s@%s\n", name.sysname, name.release);
 	return 0;
 }
-
+```
 or
-
+```
 #include <stdio.h>
 
 int main(int argc,char *argv[]){    
@@ -102,7 +103,7 @@ int main(int argc,char *argv[]){
     printf("buffer is :%s\n", buffer);
     return 0;
 }
-
+```
 Test: cmocka
 -----
 Use cmocka as testing framework, as cmocka is simple and lightweight
