@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([libgrowl], [1.0.0]. [fuyichin@gmail.com])
+AC_INIT([libgrowl], [0.1.0]. [fuyichin@gmail.com])
 AM_INIT_AUTOMAKE([foreign subdir-objects])
 AC_CONFIG_SRCDIR([src/libgrowl.c])
 
