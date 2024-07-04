@@ -12,6 +12,9 @@ Unix/Linux
 
 * automake file
 
+* ( ) add install-sh, compile, missing to repository. The file can be add from:
+$ automake --add-missing --include-deps --copy
+
 libgrowl
 =====
 
