@@ -19,3 +19,4 @@ libgrowl.o: ../src/libgrowl.c
 [x] cr6. cmocka. libgrowl. Fix test_bsd_get_platform_name_version(). Big Sur return 'macOS', older version return 'Mac OS X'.
 [v] cr7. automake. Initial framework and changes for automake autogen.sh.
 [x] cr8. cmocka. libgrowl. Improvement for multi-platform. refer cr6.
+[ ] cr9. tag: serverhack. Write a simple server hack to replace growl notificatin server, eg. for ChromeOS development. 
