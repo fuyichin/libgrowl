@@ -1,6 +1,7 @@
 libgrowl: the main library source.
 growlnotify: growlnotify program in example directory.
 cmocka: cmocka unit testing framework.
+serverhack: simple server hack to replace growl server.
 unix/makefile: eg. makefile or automake.
 xcode: macOS build tools
 vscode: vscode.
