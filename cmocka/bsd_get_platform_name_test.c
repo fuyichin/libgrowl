@@ -14,12 +14,14 @@
 #include "libgrowl.h"
 
 void bsd_get_platform_name_version(char *, char *);
+void libgrowl_set_debug_level(int);
 
 static void test_bsd_get_platform_name_version(void **state) {
 	char platform_name[80], platform_version[80];
 
 	(void) state; /* unused */
 
+	libgrowl_set_debug_level(0);
 	platform_name[0]= '\0'; platform_version[0]= '\0';
 	bsd_get_platform_name_version(platform_name,platform_version);
 #ifdef _LINUX
