@@ -360,7 +360,7 @@ void bsd_get_platform_name_version(char *platform, char *version)
     char cmd[64];
     FILE* stdoutFile;
 
-#ifdef _LINUX
+#if defined(_LINUX) || defined(LinuxOS)
 	if (debug_level>=1)
 		printf("This is Linux\n");
 	sprintf(cmd, "uname -s");
@@ -390,7 +390,7 @@ void bsd_get_platform_name_version(char *platform, char *version)
 			platform[strlen(platform)-1]='\0';
     }
 
-#ifdef _LINUX
+#if defined(_LINUX) || defined(LinuxOS)
 	sprintf(cmd, "uname -r");
 #else
     sprintf(cmd, "sw_vers -productVersion");
