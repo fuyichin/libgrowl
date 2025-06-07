@@ -43,10 +43,11 @@ $ growlnotify -v (or -vv for more information)
 
 How to compile (using automake)
 =====
+```
 $ ./configure 
 $ make
 $ make check  # for cmocka tests
-
+```
 There might be few issues with automake.
 
 configure script not found
