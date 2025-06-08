@@ -38,3 +38,13 @@ struct gntp_message {
 place struct gntp_message to gntp.h
 This involve quit a lot of changes, ready for serverhack program
 files: src/libgrowl.c, cmocka/gntp_decode_reply_test.c 
+[ ] cr16. automake. tag: guessos. use uname to guess os platform when config.guess script is not available. 
+file: configure.ac
+# detect os platform
+if test -x "./config.guess"; then
+host_os=`./config.guess`
+else
+host_os=`uname -o`
+fi
+case
+  *[[Ll]]inux* )
