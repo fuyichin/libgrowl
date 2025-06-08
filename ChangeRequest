@@ -35,6 +35,7 @@ growl_send_notification()
 struct gntp_message {
   int status;  /* 0-ok */ /* <-- should be type, not status */
 };
+message type. reply: ok, fail. request: register, notify.
 place struct gntp_message to gntp.h
 This involve quit a lot of changes, ready for serverhack program
 files: src/libgrowl.c, cmocka/gntp_decode_reply_test.c 
