@@ -1,3 +1,12 @@
 # date '+%A %B %d %Y'
-* Saturday February 10 2024  fuyichin<fuyichin@gmail.com>
-- automake
+* Tuesday June 10 2025  fuyichin<fuyichin@gmail.com>
+- compile with manual specific os platfrom
+$ CFLAGS="-D_LINUX -DLinuxOS" make
+
+file(s):
+src/Makefile
+cmocka/Makefile
+example/Makefile
+
+- solve make dist issue in configure.ac
+- add in missing files for configure eg. install-sh, Makefile.am

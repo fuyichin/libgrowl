@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS += -Wall
 CFLAGS += -I../src
 CMOCKA_LIB_PATH=/usr/local/lib
 #program=./gntp_decode_reply_test

@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -ansi -g
+CFLAGS += -Wall -g
 
 all: libgrowl.a
 

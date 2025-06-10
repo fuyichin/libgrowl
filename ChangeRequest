@@ -24,7 +24,7 @@ libgrowl.o: ../src/libgrowl.c
 [x] cr10. cmocka. tag: unix_get_system_name. unix_get_system_name() may overflow?
 remove debug message for test_bsd_get_platform_name_version()
 [ ] cr11. makefile. inconsistant preprocessor description for os eg. LinuxOS ChromeOS MacOS DarwinOS
-[ ] cr12. makefile. missing files for auto configure. install-sh, Makefile.in
+[x] cr12. (1). makefile. missing files for auto configure. install-sh, Makefile.in
 [ ] cr13. libgrowl. missing parameter description in function: gntp_get_header_value()
 very simple changes, may add in more in the future
 [ ] cr14. add in unix manual page
@@ -39,7 +39,7 @@ message type. reply: ok, fail. request: register, notify.
 place struct gntp_message to gntp.h
 This involve quit a lot of changes, ready for serverhack program
 files: src/libgrowl.c, cmocka/gntp_decode_reply_test.c 
-[ ] cr16. automake. tag: guessos. use uname to guess os platform when config.guess script is not available. 
+[ ] cr16. (0.5). automake. tag:guessos. use uname to guess os platform when config.guess script is not available. 
 file: configure.ac
 # detect os platform
 if test -x "./config.guess"; then
@@ -49,3 +49,9 @@ host_os=`uname -o`
 fi
 case
   *[[Ll]]inux* )
+
+=====
+Story point
+-----
+1. the points are 0.5, 1, 2, 3, 5, 8, 13. >13 split to smaller point. 
+2. 0.5 for 1-2 hrs, 1 for 3-4 hrs. 13 pt. Is 6.5 days. 

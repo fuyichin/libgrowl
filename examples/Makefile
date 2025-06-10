@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -ansi -g
+CFLAGS += -Wall -g
 CFLAGS += -I../src
 
 all: growlnotify

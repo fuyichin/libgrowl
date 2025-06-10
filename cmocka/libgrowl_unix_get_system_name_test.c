@@ -10,6 +10,7 @@
 #include <setjmp.h>
 #include "cmocka.h"
 #include <stdio.h>
+#include <string.h>
 #include "libgrowl.h"
 
 void unix_get_system_name(char *, int);
