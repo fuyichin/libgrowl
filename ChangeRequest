@@ -49,7 +49,9 @@ host_os=`uname -o`
 fi
 case
   *[[Ll]]inux* )
-
+[ ] cr17. (). growlnotify. To compatible with notify-send. Only 1 parameter is text. For 2 (or more) parameters, title and text. eg.
+$ growl-notify 'text'
+$ growl-notify 'title' 'text'
 =====
 Story point
 -----
