@@ -31,7 +31,7 @@ very simple changes, may add in more in the future
 Locate in man subdir, edit by program manedit
 growl_register_notifications()
 growl_send_notification()
-[ ] cr15. - change gntp_decode_reply() to gntp_decode_message() for cr9.
+[*] cr15. (2). - change gntp_decode_reply() to gntp_decode_message() for cr9.
 struct gntp_message {
   int status;  /* 0-ok */ /* <-- should be type, not status */
 };

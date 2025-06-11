@@ -1,8 +1,9 @@
 /**
- * gntp_decode_reply_test.c
+ * gntp_decode_message_test.c
  * @author hooichee<fuyichin@gmail.com>
  *
  *  Created by Chin Hooi Chee on 2/6/21.
+ *  Modified by Chin Hooi Chee on 6/10/2025
  *  Copyright © 2021 Chin Hooi Chee. All rights reserved.
  */
 #include <stdarg.h>
@@ -11,18 +12,9 @@
 #include "cmocka.h"
 #include <stdio.h>
 #include "libgrowl.h"
+#include "mygntp.h"
 
-/* this structure define twice in here and libgrowl.c */
-struct gntp_message {
-	int status;  /* 0-ok */
-};
-
-#define GNTP_OK  0
-#define GNTP_FAIL  -1
-
-void gntp_decode_reply(char *, struct gntp_message *);
-
-static void test_gntp_decode_reply_ok(void **state) {
+static void test_gntp_decode_message_ok(void **state) {
 	char msg_reply[]="\
 GNTP/1.0 -OK NONE\r\n\
 Response-Action: REGISTER\r\n\
@@ -36,12 +28,12 @@ Origin-Platform-Name: Mac OS X\r\n\
 
 	(void) state; /* unused */
 
-	gntp_decode_reply(msg_reply, &msg);
-	assert_int_equal(GNTP_OK,msg.status);
+	gntp_decode_message(msg_reply, &msg);
+	assert_int_equal(GNTP_OK,msg.type);
 
 }
 
-static void test_gntp_decode_reply_fail(void **state) {
+static void test_gntp_decode_message_fail(void **state) {
 	char msg_reply[]="\
 GNTP/1.0 -ERROR NONE\r\n\
 Error-Code: 303\r\n\
@@ -58,16 +50,16 @@ X-Timestamp: 2/6/2021 10:34:23 PM\r\n\
 
 	(void) state; /* unused */
 
-	gntp_decode_reply(msg_reply, &msg);
-	assert_int_equal(GNTP_FAIL,msg.status);
+	gntp_decode_message(msg_reply, &msg);
+	assert_int_equal(GNTP_FAIL,msg.type);
 
 }
 
 int main(void)
 {
 	const struct CMUnitTest tests[] = {
-		cmocka_unit_test(test_gntp_decode_reply_ok),
-		cmocka_unit_test(test_gntp_decode_reply_fail),
+		cmocka_unit_test(test_gntp_decode_message_ok),
+		cmocka_unit_test(test_gntp_decode_message_fail),
 	};
 
 	return cmocka_run_group_tests(tests, NULL, NULL);

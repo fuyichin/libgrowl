@@ -16,13 +16,11 @@
 #include <arpa/inet.h> /* inet_addr */
 #include <netdb.h> /* macos? */
 #include "libgrowl.h"
+#include "mygntp.h"
 
 #ifndef HOST_NAME_MAX
 #define HOST_NAME_MAX  80
 #endif
-
-#define GNTP_OK  0
-#define GNTP_FAIL  -1
 
 #ifndef min
 #define min(a,b) (a<b)?(a):(b)
@@ -34,10 +32,6 @@
 #endif
 
 #define MINIMALIST_GROWL  FALSE
-
-struct gntp_message {
-	int status;  /* 0-ok */
-};
 
 static int debug_level= 1;  /* 0-no debug, 1,2 simple info, 3-for developers */
 static char *g_host= "127.0.0.1"; /* localhost:port */
@@ -155,18 +149,18 @@ int get_string_array_size(char **name)
 /**
  *  reply. end with \0
  */
-void gntp_decode_reply(char *reply, struct gntp_message *msg)
+void gntp_decode_message(char *reply, struct gntp_message *msg)
 {
 	const char s[]= "\n";
 	char *token;
 	
-	msg->status= GNTP_FAIL;
+	msg->type= GNTP_FAIL;
 	token= strtok(reply, s);
 	while (token!=NULL) {
 		if (strncmp(token,"GNTP/",4)==0) {
 			/* check for -OK */
 			if (strstr(token,"-OK")!=NULL)
-				msg->status= GNTP_OK;
+				msg->type= GNTP_OK;
 			break;
 		}
 		
@@ -323,9 +317,9 @@ int gntp_send(char *data, int d_size, char *host, int port, char *reply, int rep
 		fprintf(stdout, "[%s]\n", server_reply);
 	}
 
-	strcpy(tmp_reply,server_reply); /* gntp_decode_reply will change the value of server_reply */	
-	gntp_decode_reply(tmp_reply,&gntp_reply);
-	if (gntp_reply.status==GNTP_OK) {
+	strcpy(tmp_reply,server_reply); /* gntp_decode_message will change the value of server_reply */	
+	gntp_decode_message(tmp_reply,&gntp_reply);
+	if (gntp_reply.type==GNTP_OK) {
 		if (debug_level>=1)
 			fprintf(stdout, "gntp reply success.\n");
 	}

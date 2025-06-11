@@ -1,12 +1,5 @@
 # date '+%A %B %d %Y'
 * Tuesday June 10 2025  fuyichin<fuyichin@gmail.com>
-- compile with manual specific os platfrom
-$ CFLAGS="-D_LINUX -DLinuxOS" make
-
-file(s):
-src/Makefile
-cmocka/Makefile
-example/Makefile
-
-- solve make dist issue in configure.ac
-- add in missing files for configure eg. install-sh, Makefile.am
+- change gntp_decode_reply() to gntp_decode_message()
+- change struct gntp_message.status to type
+- new mygntp.h for some commonly use headers

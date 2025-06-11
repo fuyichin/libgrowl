@@ -1,6 +1,6 @@
 AM_CPPFLAGS = -I$(top_srcdir)/src
 
-program=gntp_decode_reply_test \
+program=gntp_decode_message_test \
 check_default_setting_test \
 gntp_get_header_value_test \
 libgrowl_minimalist_mode_test \
@@ -12,9 +12,9 @@ check_PROGRAMS=$(program)
 ### this will execute the test
 TESTS=$(program)
 
-gntp_decode_reply_test_CFLAGS=$(CMOCKA_CFLAGS)
-gntp_decode_reply_test_LDADD=$(CMOCKA_LIBS)
-gntp_decode_reply_test_SOURCES=gntp_decode_reply_test.c ../src/libgrowl.c
+gntp_decode_message_test_CFLAGS=$(CMOCKA_CFLAGS)
+gntp_decode_message_test_LDADD=$(CMOCKA_LIBS)
+gntp_decode_message_test_SOURCES=gntp_decode_message_test.c ../src/libgrowl.c
 
 check_default_setting_test_CFLAGS=$(CMOCKA_CFLAGS)
 check_default_setting_test_LDADD=$(CMOCKA_LIBS)
