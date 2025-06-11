@@ -1,3 +1,17 @@
 use 
 $ doxygen [doxygen.conf]
 to generate document file.
+
+GrowlServerHack
+=====
+GrowlServerHack (serverhack.c) is a simply a server program to forward the notification message from client, to the unix dbus. It just just used for testing if Windows Growl, macOS growl, Growl on Linux is not available. For example when develop on a ChomeOS system, use GrowlServerHack.
+
+$ examples/GrowServerHack &
+
+How to compile GrowlServerHack
+-----
+You need libnotify (Debian:libnotify-dev). If automake is not available, use the initial Makefile
+$ CFLAGS="-D_LINUX -DLinuxOS" make growlserverhack
+==> GrowlServerHack
+
+$ gcc -o GrowlServerHack serverhack.o libgrowl.o `pkg-config --libs libnotify`
