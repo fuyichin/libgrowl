@@ -161,6 +161,10 @@ void gntp_decode_message(char *reply, struct gntp_message *msg)
 			/* check for -OK */
 			if (strstr(token,"-OK")!=NULL)
 				msg->type= GNTP_OK;
+			else if (strstr(token,"REGISTER")!=NULL)
+				msg->type= GNTP_REGISTER;
+			else if (strstr(token,"NOTIFY")!=NULL)
+				msg->type= GNTP_NOTIFY;
 			break;
 		}
 		
