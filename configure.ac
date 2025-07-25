@@ -30,6 +30,24 @@ fi
 
 # Checks for library functions.
 
+## serverhack need libnotify, this is not necessary, so default is no
+serverhack="no"
+AC_ARG_ENABLE(serverhack,
+[ --enable-serverhack    Enable server hack [default=disabled]], serverhack="yes",
+    serverhack="no")
+if test "x$serverhack" = "xno"; then
+	AC_MSG_RESULT([*** server hack disable as default ***])
+fi
+
+if test "x$serverhack" = "xyes"; then
+AC_MSG_RESULT([*** server hack is enable ***])
+	# check for pkg-config
+	PKG_PROG_PKG_CONFIG
+	### generate LIBNOTIFY_CFLAGS, LIBNOTIFY_LIBS
+	PKG_CHECK_MODULES([LIBNOTIFY],[libnotify])
+	CFLAGS="$CFLAGS -D_SERVERHACK"
+fi
+
 # enable debug mode
 debug_mode="no"
 AC_ARG_ENABLE(debug,

@@ -4,6 +4,7 @@ REGISTER. Always reply ok.
 NOTIFY. reply ok and send message to dbus.
 */
 #include <stdio.h>
+#ifdef _SERVERHACK
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -25,13 +26,19 @@ char *serverhack_format_message_fail(char *, char *, char *);
 #define PORT 23053
 #define MAX_BUFFER_SIZE 1024
 
-int main() {
+int main(int argc, char *argv[]) {
    int server_fd, new_socket, valread;
    struct sockaddr_in address;
    int opt = 1;
    socklen_t addrlen = sizeof(address);
    char buffer[MAX_BUFFER_SIZE] = {0};
    pid_t pid;
+
+	// This is for testing
+	if (argc>=2) {
+		if (strcmp(argv[1],"--test")==0)
+			return 0;
+	}
 
    // Creating socket file descriptor
    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 1) {
@@ -197,3 +204,11 @@ char *serverhack_format_message_fail(char *message, char *code, char *descriptio
 
 	return message;
 }
+
+#else
+/* no server hack */
+	int main() {
+		printf("Server hack is not enable, try --configure --enable-serverhack before compile\n");
+		return 1;
+	}
+#endif
