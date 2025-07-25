@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: install cmocka
+      run: sudo apt install libcmocka-dev -y
     - name: create configure
       run: aclocal; autoconf; automake --add-missing --include-deps
     - name: configure
