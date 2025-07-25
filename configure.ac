@@ -80,8 +80,11 @@ fi
 # detect os platform
 if test -x "./config.guess"; then
 host_os=`./config.guess`
+elif test `which uname`; then
+# this should be simplest for most unix platform
+host_os=`uname -s`
 fi
-echo "*** host_os $host_os"
+echo "*** host_os '$host_os'"
 if test "x$host_os" = "x"; then
 # echo "host os blank"
 # This is old type checking, new use $os_host AM_PROG_LIBTOOL
@@ -90,10 +93,10 @@ AC_CHECK_HEADER(getopt.h, CFLAGS="$CFLAGS -DLinuxOS -D_LINUX")
 else
   echo " *** host_os $host_os *** "
   case ${host_os} in
-  *linux* )
+  *linux* | Linux)
     CFLAGS="$CFLAGS -DLinuxOS -D_LINUX"
     ;;
-  *darwin*)
+  *darwin* | Darwin)
     CFLAGS="$CFLAGS -DMacOS -DOSX -DDarwin -DTERMIOS"
     ;;
   *)
@@ -101,6 +104,7 @@ else
     ;;
   esac
 fi
+echo "*** step 2: host_os '$host_os' $CFLAGS"
 
 AC_CONFIG_FILES([Makefile src/Makefile cmocka/Makefile]
   examples/Makefile)
