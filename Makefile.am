@@ -11,4 +11,5 @@ maintainer-clean-local:
 	rm -f config.log 
 	rm -rf .deps src/.deps examples/.deps cmocka/.deps
 	rm -rf src/.dirstamp
+	rm -rf test-driver
  

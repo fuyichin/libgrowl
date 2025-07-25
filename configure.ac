@@ -52,13 +52,11 @@ AC_ARG_ENABLE(cmocka,
 if test "x$cmocka_mode" = "xno"; then
     AC_MSG_RESULT([*** cmocka mode disable as user request ***])
 else
-    AC_MSG_RESULT([*** cmocka mode enable as default ***])
-fi
-
-if test "x$cmocka_mode" = "xyes"; then
-# check cmocka library
-### generate CMOCKA_CFLAGS, CMOCKA_LIBS
-PKG_CHECK_MODULES([CMOCKA],[cmocka])
+  AC_MSG_RESULT([*** cmocka mode enable as default ***])
+  # check for pkg-config
+  PKG_PROG_PKG_CONFIG
+  ### generate CMOCKA_CFLAGS, CMOCKA_LIBS
+  PKG_CHECK_MODULES([CMOCKA],[cmocka])
 fi
 
 # detect os platform
