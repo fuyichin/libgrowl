@@ -4,7 +4,6 @@ REGISTER. Always reply ok.
 NOTIFY. reply ok and send message to dbus.
 */
 #include <stdio.h>
-#ifdef _SERVERHACK /* till end of the file */
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -12,7 +11,9 @@ NOTIFY. reply ok and send message to dbus.
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/wait.h>
+#ifdef _LIBNOTIFY
 #include <libnotify/notify.h>
+#endif
 #include "libgrowl.h"
 #include "mygntp.h"
 
@@ -23,9 +24,27 @@ char *gntp_get_header_value(char *, int, char *, char *);
 char *serverhack_format_message_ok(char *, char *);
 char *serverhack_format_message_fail(char *, char *, char *);
 
+int get_param_mode(char *args[], int argc, char *mode);
+
+#ifndef FALSE
+#define FALSE 0
+#define TRUE !FALSE
+#endif
 #define PORT 23053
 #define MAX_BUFFER_SIZE 1024
 
+#ifdef _LIBNOTIFY
+int console_mode= FALSE;
+#else
+/* no libnotify, console_mode= TRUE */
+int console_mode= TRUE;
+#endif
+
+/* This program looks a bit complicated and confusing, please
+   refer to the documentation of the program flow at the end of this file
+*/
+#ifdef _SERVERHACK /* till end of the file */
+#ifndef _TEST
 int main(int argc, char *argv[]) {
 	int server_fd, new_socket, valread;
 	struct sockaddr_in address;
@@ -39,6 +58,9 @@ int main(int argc, char *argv[]) {
 		if (strcmp(argv[1],"--test")==0)
 			return 0;
 	}
+
+	if (console_mode==FALSE)
+		console_mode= get_param_mode(argv, argc, "--console");
 
 	// Creating socket file descriptor
 	if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 1) {
@@ -89,7 +111,9 @@ int main(int argc, char *argv[]) {
 			char tmp_message[2000];
 			struct gntp_message gntp_message;
 			char value[160];
+#ifdef _LIBNOTIFY
 			NotifyNotification *growl_notification; /* just forward the message to dbus */
+#endif
 
 			// Child process
 			close(server_fd); // Close the listening socket in the child
@@ -141,13 +165,25 @@ int main(int argc, char *argv[]) {
 				strcpy(tmp_message, buffer);
 				gntp_get_header_value(message_text, sizeof(message_text), "Notification-Text", tmp_message);
 
-				/* send notification to dbus */
-				notify_init("growlserverhack"); /* create libnotify init */
 				if (strcmp(message_title,"")==0)
 					strcpy(message_title,"Growl Server Hack");
-				growl_notification= notify_notification_new( /* send notification message */
-					message_title, message_text, "dialog-information");
-				notify_notification_show(growl_notification, NULL);	
+#ifdef _LIBNOTIFY
+				if (!console_mode) {
+					/* send notification to dbus */
+					notify_init("growlserverhack"); /* create libnotify init */
+					growl_notification= notify_notification_new( /* send notification message */
+						message_title, message_text, "dialog-information");
+					notify_notification_show(growl_notification, NULL);
+				} 
+				else {
+					/* console_mode */
+					printf("<%s>[%s]\n", message_title, message_text);
+				}
+#else
+				/* output to console display */
+				if (console_mode)
+					printf("<%s>[%s]\n", message_title, message_text);
+#endif	
 				}
 			else {
 				// reply fail
@@ -171,6 +207,7 @@ int main(int argc, char *argv[]) {
 	close(server_fd); // This line is unreachable in the current loop structure
 	return 0;
 }
+#endif /* _TEST */
 
 /*
 *  quick hack. from reply message ok
@@ -214,8 +251,55 @@ char *serverhack_format_message_fail(char *message, char *code, char *descriptio
 
 #else
 /* no server hack */
+#ifndef _TEST
 	int main() {
 		printf("Server hack is not enable, try --configure --enable-serverhack before compile\n");
 		return 1;
 	}
-#endif
+#endif /* _TEST */
+#endif /* _SERVERHACK */
+
+int get_param_mode(char *args[], int argc, char *mode) {
+	int result= FALSE;
+	int i;
+
+	for (i=0; i<argc; i++) {
+		if (strcmp(args[i],mode)==0) {
+			result= TRUE;
+			/* if extra value after mode name, check is 0|off */
+			if (i+1<argc)
+				if (strcmp(args[i+1],"0")==0 || strcmp(args[i+1],"off")==0) {
+					result= FALSE;
+					break;
+				}
+		}
+	}
+	return result;
+}
+
+/* explanation of the program flow
+
+if -D_SERVERHACK not enable, this program do nothing, it is empty.
+
+// if -D_SERVERHACK
+while(1) {
+	// socket server listing to a client connection.
+
+	// fork out a child
+
+	// child process client request 1. init 2. notify message
+
+	// parent socket continue listing 
+}
+
+// if -D_LIBNOTIFY, child forward notify message to dbus
+// if -D_LIBNOTIFY + console_mode=1, output message to console display
+
+// if no libnotify, just console_mode=1, output message to console display
+
+// when _TEST is enabled, it is used for cmocka unit test
+// it remove 2 main() from this program, 1. main() for server hack 2. main() no server hack
+
+// for testing [--disable-serverhack] (default)
+// for production --enable-serverhack, --disable-libnotify output message to console
+*/

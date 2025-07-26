@@ -98,6 +98,7 @@ else
   PKG_PROG_PKG_CONFIG
   ### generate CMOCKA_CFLAGS, CMOCKA_LIBS
   PKG_CHECK_MODULES([CMOCKA],[cmocka])
+#  CFLAGS="$CFLAGS -D_TEST" # TEST place in cmocka/Makefile.am
 fi
 
 # detect os platform
