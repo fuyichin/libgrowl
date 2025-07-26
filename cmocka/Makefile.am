@@ -8,9 +8,11 @@ libgrowl_unix_get_system_name_test \
 libgrowl_set_growl_server_test \
 bsd_get_platform_name_test
 
-check_PROGRAMS=$(program)
+serverhack_program=serverhack_test
+
+check_PROGRAMS=$(program) $(serverhack_program)
 ### this will execute the test
-TESTS=$(program)
+TESTS=$(program) $(serverhack_program)
 
 gntp_decode_message_test_CFLAGS=$(CMOCKA_CFLAGS)
 gntp_decode_message_test_LDADD=$(CMOCKA_LIBS)
@@ -39,3 +41,11 @@ libgrowl_set_growl_server_test_SOURCES=libgrowl_set_growl_server_test.c ../src/l
 bsd_get_platform_name_test_CFLAGS=$(CMOCKA_CFLAGS)
 bsd_get_platform_name_test_LDADD=$(CMOCKA_LIBS)
 bsd_get_platform_name_test_SOURCES=bsd_get_platform_name_test.c ../src/libgrowl.c
+
+#AM_CFLAGS=-I$(top_srcdir)/src
+#AM_CFLAGS+=-D_TEST
+
+# serverhack GrowlServerHack
+serverhack_test_CFLAGS=$(CMOCKA_CFLAGS) $(LIBNOTIFY_CFLAGS) -D_TEST
+serverhack_test_LDADD=$(CMOCKA_LIBS) $(LIBNOTIFY_LIBS)
+serverhack_test_SOURCES=serverhack_test.c ../examples/serverhack.c

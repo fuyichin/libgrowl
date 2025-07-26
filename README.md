@@ -164,3 +164,11 @@ edit the cmocka Makefile, if necessary:
     CMOCKA_LIB_PATH=/usr/local/lib
 
 Read gntp_decode_reply_test.c, check_default_setting_test.c as sample program.
+
+GrowlServerHack(serverhack.c)
+-----
+GrowlServerHack is created for testing in environment without Growl server, eg. chromeOS. The server just forward message to dbus. The minimalist of the server hack just output to console, doesn't need libnotify.
+
+```
+./configure --enable-serverhack --disable-libnotify
+```
