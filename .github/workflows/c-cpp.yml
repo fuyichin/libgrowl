@@ -18,7 +18,7 @@ jobs:
     - name: create configure
       run: aclocal; autoconf; automake --add-missing --include-deps
     - name: configure
-      run: ./configure
+      run: ./configure --disable-libnotify
     - name: make
       run: make
     - name: make check
