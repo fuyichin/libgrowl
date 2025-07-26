@@ -91,4 +91,4 @@ case
   else /* any other gntp message, return fail */
     return fail;
 [ ] cr27. ref cr24. Allow growlnotify to send multiple notification message.
-[ ] cr28. cmocka. Test case for serverhack.c, get_param_mode().
+[x] cr28. cmocka. Test case for serverhack.c, get_param_mode().
