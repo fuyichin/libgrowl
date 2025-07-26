@@ -30,6 +30,29 @@ fi
 
 # Checks for library functions.
 
+# enable libnotify
+libnotify="yes"  # enable by default
+AC_ARG_ENABLE(libnotify,
+[ --disable-libnotify    Disable libnotify mode [default=enabled]], libnotify="no",
+    libnotify="yes")
+echo "*** libnotify $libnotify"
+
+if test "x$libnotify" = "xno"; then
+  AC_MSG_RESULT([*** libnotify disable as user request ***])
+fi
+
+if test "x$libnotify" = "xyes"; then
+  # check for pkg-config
+  PKG_PROG_PKG_CONFIG
+  ### generate LIBNOTIFY_CFLAGS, LIBNOTIFY_LIBS
+  PKG_CHECK_MODULES([LIBNOTIFY],[libnotify])
+  CFLAGS="$CFLAGS -D_LIBNOTIFY"
+else
+  # create empty LD and CFLAGS for LIBNOTIFY
+#  PKG_CHECK_MODULES([LIBNOTIFY],[""])
+  echo "how to create empty LIBNOTIFY here??"
+fi
+
 ## serverhack need libnotify, this is not necessary, so default is no
 serverhack="no"
 AC_ARG_ENABLE(serverhack,
@@ -44,7 +67,7 @@ AC_MSG_RESULT([*** server hack is enable ***])
 	# check for pkg-config
 	PKG_PROG_PKG_CONFIG
 	### generate LIBNOTIFY_CFLAGS, LIBNOTIFY_LIBS
-	PKG_CHECK_MODULES([LIBNOTIFY],[libnotify])
+#	PKG_CHECK_MODULES([LIBNOTIFY],[libnotify])  # already generated earlier if necessary, now can support console mode
 	CFLAGS="$CFLAGS -D_SERVERHACK"
 fi
 
