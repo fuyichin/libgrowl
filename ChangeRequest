@@ -92,3 +92,17 @@ case
     return fail;
 [ ] cr27. ref cr24. Allow growlnotify to send multiple notification message.
 [x] cr28. cmocka. Test case for serverhack.c, get_param_mode().
+[ ] cr29. disable_libnotify. automake. Add --disable-libnotify in configure script
+  This is to test the code without libnotify, even compile on a host with libnotify
+  $ ./configure --disable-libnotify
+  $ make clean; make check
+[ ] Discussion. Target to remove unnecessary C preprocessor macro _HACKSERVER, _TEST
+  Too many preprocessor macro makes serverhack.c program logic hard to read and understand.
+
+  [ ] _HACKSERVER
+  Always create serverhack program, just do not installed in binary. 
+  Remove the 2nd main() in serverhack.c
+  configure.ac, remove --enable-serverhack
+  [ ] _TEST
+  Move get_param_mode() to a seperate file common.c and common.h
+  Remove _TEST from cmocka/Makefile.am
