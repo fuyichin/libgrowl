@@ -25,6 +25,8 @@ jobs:
       run: make
     - name: make check
       run: make check
+      - name:  check name libnotify
+      run: sudo apt update; apt-cache search libnotify
     - name: install libnotify
       run: sudo apt install libnotify4 -y
     - name: configure with libnotify
