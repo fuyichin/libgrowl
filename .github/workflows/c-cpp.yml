@@ -28,7 +28,7 @@ jobs:
       - name:  check name libnotify
       run: sudo apt update; apt-cache search libnotify
     - name: install libnotify
-      run: sudo apt install libnotify4 -y
+      run: sudo apt install libnotify-dev
     - name: configure with libnotify
       run: CC="tcc" ./configure 
     - name: make check (libnotify)
