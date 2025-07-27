@@ -104,5 +104,5 @@ case
   Remove the 2nd main() in serverhack.c
   configure.ac, remove --enable-serverhack
   [ ] _TEST
-  Move get_param_mode() to a seperate file common.c and common.h
+  Move get_param_mode() to a seperate file param.c and param.h
   Remove _TEST from cmocka/Makefile.am
