@@ -42,6 +42,8 @@ bsd_get_platform_name_test_CFLAGS=$(CMOCKA_CFLAGS)
 bsd_get_platform_name_test_LDADD=$(CMOCKA_LIBS)
 bsd_get_platform_name_test_SOURCES=bsd_get_platform_name_test.c ../src/libgrowl.c
 
+#donot_install_growlserverhack_test_SOURCES=donot_install_growlserverhack.c
+
 #AM_CFLAGS=-I$(top_srcdir)/src
 #AM_CFLAGS+=-D_TEST
 
