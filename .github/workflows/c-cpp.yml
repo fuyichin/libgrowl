@@ -1,0 +1,37 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: install cmocka
+      run: sudo apt install libcmocka-dev -y
+    - name: install tcc
+      run: sudo apt install tcc -y
+    - name: create configure
+      run: aclocal; autoconf; automake --add-missing --include-deps
+    - name: configure
+      run: CC="tcc" ./configure --disable-libnotify
+    - name: make
+      run: make
+    - name: make check
+      run: make check
+    - name:  check name libnotify
+      run: sudo apt update; apt-cache search libnotify
+    - name: install libnotify
+      run: sudo apt install libnotify-dev
+    - name: configure with libnotify
+      run: CC="tcc" ./configure 
+    - name: make check (libnotify)
+      run: make clean; make check
+
+
