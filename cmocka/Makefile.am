@@ -1,4 +1,4 @@
-AM_CPPFLAGS = -I$(top_srcdir)/src
+AM_CPPFLAGS = -I$(top_srcdir)/src  -I$(top_srcdir)/examples
 
 program=gntp_decode_message_test \
 check_default_setting_test \
@@ -8,7 +8,8 @@ libgrowl_unix_get_system_name_test \
 libgrowl_set_growl_server_test \
 bsd_get_platform_name_test
 
-serverhack_program=serverhack_test
+serverhack_program=serverhack_test \
+param_test
 
 check_PROGRAMS=$(program) $(serverhack_program)
 ### this will execute the test
@@ -51,3 +52,7 @@ bsd_get_platform_name_test_SOURCES=bsd_get_platform_name_test.c ../src/libgrowl.
 serverhack_test_CFLAGS=$(CMOCKA_CFLAGS) $(LIBNOTIFY_CFLAGS) -D_TEST
 serverhack_test_LDADD=$(CMOCKA_LIBS) $(LIBNOTIFY_LIBS)
 serverhack_test_SOURCES=serverhack_test.c ../examples/serverhack.c
+
+param_test_CFLAGS=$(CMOCKA_CFLAGS)
+param_test_LDADD=$(CMOCKA_LIBS)
+param_test_SOURCES=param_test.c ../examples/param.c

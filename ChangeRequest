@@ -15,7 +15,7 @@ cr2. document. Fix Readme.md file for Linux pandoc Latex. '==>'
 cr3. cmocka. run_unit_test.sh only process the first parameter
 [x] cr4. cmocka. CFLAGS not inlcuded in the compile for libgrowl.c
 libgrowl.o: ../src/libgrowl.c
-	$(CC) -c ../src/libgrowl.c -I../src  # <== missing CFLAGS 
+  $(CC) -c ../src/libgrowl.c -I../src  # <== missing CFLAGS 
 [x] cr5. review TODO, add new solutions. eg. check platform name in test case.
 [x] cr6. cmocka. libgrowl. Fix test_bsd_get_platform_name_version(). Big Sur return 'macOS', older version return 'Mac OS X'.
 [v] cr7. automake. Initial framework and changes for automake autogen.sh.
@@ -90,16 +90,17 @@ case
     send message
   else /* any other gntp message, return fail */
     return fail;
-[ ] cr27. ref cr24. Allow growlnotify to send multiple notification message.
+[ ] cr27. ref cr24. send_multiple_msg. Allow growlnotify to send multiple notification message.
 [x] cr28. cmocka. Test case for serverhack.c, get_param_mode().
 [ ] cr29. disable_libnotify. automake. Add --disable-libnotify in configure script
+  - add --disable-libnotify in configure script, default libnotify="on"
   This is to test the code without libnotify, even compile on a host with libnotify
   $ ./configure --disable-libnotify
   $ make clean; make check
 [ ] Discussion. Target to remove unnecessary C preprocessor macro _HACKSERVER, _TEST
   Too many preprocessor macro makes serverhack.c program logic hard to read and understand.
 
-  [ ] _HACKSERVER
+  [ ] _HACKSERVER, remove_hackserver_macro
   Always create serverhack program, just do not installed in binary. 
   Remove the 2nd main() in serverhack.c
   configure.ac, remove --enable-serverhack
