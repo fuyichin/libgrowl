@@ -11,7 +11,8 @@ bsd_get_platform_name_test
 serverhack_program=serverhack_test \
 param_test
 
-script_program=automake_disable_libnotify_test.sh
+script_program=automake_disable_libnotify_test.sh \
+donot_install_growlserverhack_test.sh
 
 check_PROGRAMS=$(program) $(serverhack_program)
 ### this will execute the test

@@ -1,5 +1,7 @@
 AM_CPPFLAGS=-I$(top_srcdir)/src
-bin_PROGRAMS=growlnotify GrowlServerHack
+bin_PROGRAMS=growlnotify 
+# this will be compile but not installed
+check_PROGRAMS=GrowlServerHack
 
 growlnotify_SOURCES=growlnotify.c ../src/libgrowl.c
 
