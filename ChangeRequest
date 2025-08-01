@@ -97,14 +97,18 @@ case
   This is to test the code without libnotify, even compile on a host with libnotify
   $ ./configure --disable-libnotify
   $ make clean; make check
+  Note: Seems like this has been done, just need to modified the test script
+  cmocka/automake_disable_libnotify_test.sh
+  if disable, no -D_LIBNOTIFY in CFLAGS
 [ ] Discussion. Target to remove unnecessary C preprocessor macro _HACKSERVER, _TEST
   Too many preprocessor macro makes serverhack.c program logic hard to read and understand.
+  Todo: 1. remove _TEST 2. remove _SERVERHACK
 
-  [ ] _HACKSERVER, remove_hackserver_macro
+  [ ] () _SERVERHACK, remove_serverhack_macro
   Always create serverhack program, just do not installed in binary. 
   Remove the 2nd main() in serverhack.c
   configure.ac, remove --enable-serverhack
-  [ ] _TEST
+  [ ] (1) _TEST, remove_test_macro
   Move get_param_mode() to a seperate file param.c and param.h
   Remove _TEST from cmocka/Makefile.am
 [ ] (0.5) cr. Create server hack binary to be run on busybox.
@@ -119,11 +123,14 @@ case
     WORKDIR /home
     COPY GrowlServerHack /home/.
     RUN ["/bin/chmod", "+x", "/home/GrowlServerHack"]
-    CMD ["/home/GrowlServer/Hack"]
-[ ] (5) cr. Issue. When compile with tcc, not optimize? (-g) enable.
+    CMD ["/home/GrowlServerHack"]
+[ ] (5) cr. Study. When compile with tcc, not optimize? (-g) enable.
   CC=tcc ./configure --disable-libnotify
   cd examples; make GrowlServerHack
   ==>
   tcc  -g -Wall -o GrowlServerHack [...]
   # should be
   tcc  -O2 -Wall -o GrowlServerHack [...]
+  But gcc will enable -O2, temporary use manual compile
+  Use tcc to get a smaller binary for busybox. 
+  examples$ tcc -O2 -D_SERVERHACK -I../src -o GrowlServerHack serverhack.c src/libgrowl.c
