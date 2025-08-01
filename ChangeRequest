@@ -107,3 +107,23 @@ case
   [ ] _TEST
   Move get_param_mode() to a seperate file param.c and param.h
   Remove _TEST from cmocka/Makefile.am
+[ ] (0.5) cr. Create server hack binary to be run on busybox.
+  Alpine use musl library. Busybox use glibc same? with Debian/ubuntu, 
+  just do not include libnotify will do.
+[ ] (1) cr. Create a Dockerfile to run GrowServerHack on busybox.
+  #docker_busybox_serverhack
+  Create libgrowl/docker/busybox_serverhack/Dockerfile,
+    # something like this
+    FROM busybox
+    LABEL maintainer="run GrowlServerHack on busybox"
+    WORKDIR /home
+    COPY GrowlServerHack /home/.
+    RUN ["/bin/chmod", "+x", "/home/GrowlServerHack"]
+    CMD ["/home/GrowlServer/Hack"]
+[ ] (5) cr. Issue. When compile with tcc, not optimize? (-g) enable.
+  CC=tcc ./configure --disable-libnotify
+  cd examples; make GrowlServerHack
+  ==>
+  tcc  -g -Wall -o GrowlServerHack [...]
+  # should be
+  tcc  -O2 -Wall -o GrowlServerHack [...]
