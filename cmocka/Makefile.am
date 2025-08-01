@@ -11,9 +11,12 @@ bsd_get_platform_name_test
 serverhack_program=serverhack_test \
 param_test
 
+script_program=automake_disable_libnotify_test.sh
+
 check_PROGRAMS=$(program) $(serverhack_program)
 ### this will execute the test
-TESTS=$(program) $(serverhack_program)
+TESTS=$(program) $(serverhack_program) \
+$(script_program)
 
 gntp_decode_message_test_CFLAGS=$(CMOCKA_CFLAGS)
 gntp_decode_message_test_LDADD=$(CMOCKA_LIBS)
