@@ -59,7 +59,7 @@ case
   Windows: _Windows Win32 Win64
 [ ] cr20. libgrowl. grownotify. cmocka. automake. Standardize pre-processor name for os platform:
   Sun: _SunOS Solaris
-[x] (1) cr21. libnotify. automake. Detect libnotify in automake configure script, enable by default, can be disable manually:
+[*] (1) cr21. libnotify. automake. Detect libnotify in automake configure script, enable by default, can be disable manually:
   libnotify enable by default, can by disable by --disable-libnotify in configure script
   if libnotify not detected on the host, disable it.
   if libnotify is enable, add -D_LIBNOTIFY in CFLAGS
@@ -76,10 +76,11 @@ case
     if console_mode==TRUE
       // send message to console display, code detail in cr23.
   #endif
-  [ ] cr23. libnotify. Code for detect console mode in runtime and output messages. ref cr22.
+  [*] cr23. libnotify. Code for detect console mode in runtime and output messages. ref cr22.
     --console 1|on, console_mode=TRUE
     Output format: index:[title]<message>(ip)
     index can be turn on by --set-nu
+    Note: The line number is always reset, as every connection server fork() new process. Unless change server as one connection only. 
 [ ] cr24. growlnotify. Rearrange parameter to 'growlnotify <message> [<messages ...] [-t <title>]'
   Earlier paramater is 1. <message> 2. <title> <message>, message is 1st or 2nd depends on <title> is provided or not. I find it confusing.
 [*] cr25. reformat serverhack.c nicely. 
