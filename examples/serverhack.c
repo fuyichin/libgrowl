@@ -44,7 +44,6 @@ int console_mode= TRUE;
 /* This program looks a bit complicated and confusing, please
    refer to the documentation of the program flow at the end of this file
 */
-#ifdef _SERVERHACK /* till end of the file */
 int main(int argc, char *argv[]) {
 	int server_fd, new_socket, valread;
 	struct sockaddr_in address;
@@ -89,6 +88,9 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
+#ifdef _LIBNOTIFY
+	printf("Enable _LIBNOTIFY\n");
+#endif
 	printf("Server listening on port %d\n", PORT);
 
 	while (1) {
@@ -247,17 +249,9 @@ char *serverhack_format_message_fail(char *message, char *code, char *descriptio
 	return message;
 }
 
-#else
-/* no server hack */
-	int main() {
-		printf("Server hack is not enable, try --configure --enable-serverhack before compile\n");
-		return 1;
-	}
-#endif /* _SERVERHACK */
-
 /* explanation of the program flow
 
-if -D_SERVERHACK not enable, this program do nothing, it is empty.
+-D_SERVERHACK is always enable, so remove the code, make the logic simpler
 
 // if -D_SERVERHACK
 while(1) {
