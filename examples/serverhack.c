@@ -23,6 +23,7 @@ char *gntp_get_header_value(char *, int, char *, char *);
 
 char *serverhack_format_message_ok(char *, char *);
 char *serverhack_format_message_fail(char *, char *, char *);
+void output_message_console(char *title, char *message);
 
 int get_param_mode(char *args[], int argc, char *mode);
 
@@ -39,6 +40,7 @@ int console_mode= FALSE;
 /* no libnotify, console_mode= TRUE */
 int console_mode= TRUE;
 #endif
+int show_line_number= FALSE;
 
 /* This program looks a bit complicated and confusing, please
    refer to the documentation of the program flow at the end of this file
@@ -61,6 +63,8 @@ int main(int argc, char *argv[]) {
 
 	if (console_mode==FALSE)
 		console_mode= get_param_mode(argv, argc, "--console");
+	if (show_line_number==FALSE)
+		show_line_number= get_param_mode(argv, argc, "--set-nu");
 
 	// Creating socket file descriptor
 	if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 1) {
@@ -118,7 +122,7 @@ int main(int argc, char *argv[]) {
 			// Child process
 			close(server_fd); // Close the listening socket in the child
 #ifdef _DEBUG
-			printf("===== chile process started to read =====\n");
+			printf("===== child process started to read =====\n");
 #endif
 			valread= read(new_socket, buffer, MAX_BUFFER_SIZE);
 #ifdef _DEBUG
@@ -177,12 +181,17 @@ int main(int argc, char *argv[]) {
 				} 
 				else {
 					/* console_mode */
-					printf("<%s>[%s]\n", message_title, message_text);
+					output_message_console(message_title, message_text);
+					output_message_console(message_title, message_text);
+//					printf("<%s>[%s]\n", message_title, message_text);
 				}
 #else
 				/* output to console display */
-				if (console_mode)
-					printf("<%s>[%s]\n", message_title, message_text);
+				if (console_mode) {
+					output_message_console(message_title, message_text);
+					output_message_console(message_title, message_text);
+//					printf("<%s>[%s]\n", message_title, message_text);
+				}
 #endif	
 				}
 			else {
@@ -247,6 +256,16 @@ char *serverhack_format_message_fail(char *message, char *code, char *descriptio
 	strcat(message, text);
 
 	return message;
+}
+
+/* output to console */
+void output_message_console(char *title, char *message) {
+	static int line_count= 0;
+	if (show_line_number)
+		printf("%d:<%s>[%s]\n", line_count, title, message);
+	else
+		printf("<%s>[%s]\n", title, message);
+	++line_count;
 }
 
 #else
