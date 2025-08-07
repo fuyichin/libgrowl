@@ -3,4 +3,10 @@
 #define VERBOSE_OUTUT 1
 #define VERBOSE_DEBUG 2
 
+#ifndef FALSE
+#define FALSE 0
+#define TRUE !FALSE
+#endif
+
 int get_param_verbose_level(char *args[], int argc);
+int get_param_mode(char *args[], int argc, char *mode);

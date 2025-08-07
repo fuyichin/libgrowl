@@ -25,3 +25,24 @@ int get_param_verbose_level(char *args[], int argc) {
 	return verbose;
 }
 
+/**
+ * retrieve mode eg. --console, from parameter
+ * return TRUE or FALSE
+ */
+int get_param_mode(char *args[], int argc, char *mode) {
+	int result= FALSE;
+	int i;
+
+	for (i=0; i<argc; i++) {
+		if (strcmp(args[i],mode)==0) {
+			result= TRUE;
+			/* if extra value after mode name, check is 0|off */
+			if (i+1<argc)
+				if (strcmp(args[i+1],"0")==0 || strcmp(args[i+1],"off")==0) {
+					result= FALSE;
+					break;
+				}
+		}
+	}
+	return result;
+}

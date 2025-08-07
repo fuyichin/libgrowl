@@ -100,7 +100,7 @@ case
   Note: Seems like this has been done, just need to modified the test script
   cmocka/automake_disable_libnotify_test.sh
   if disable, no -D_LIBNOTIFY in CFLAGS
-[ ] Discussion. Target to remove unnecessary C preprocessor macro _HACKSERVER, _TEST
+[*] Discussion. Target to remove unnecessary C preprocessor macro _HACKSERVER, _TEST
   Too many preprocessor macro makes serverhack.c program logic hard to read and understand.
   Todo: 1. remove _TEST 2. remove _SERVERHACK
 
@@ -108,7 +108,7 @@ case
   Always create serverhack program, just do not installed in binary. 
   Remove the 2nd main() in serverhack.c
   configure.ac, remove --enable-serverhack
-  [ ] (1) _TEST, remove_test_macro
+  [*] (1) _TEST, remove_test_macro
   Move get_param_mode() to a seperate file param.c and param.h
   Remove _TEST from cmocka/Makefile.am
 [ ] (0.5) cr. Create server hack binary to be run on busybox.
