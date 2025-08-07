@@ -8,8 +8,7 @@ libgrowl_unix_get_system_name_test \
 libgrowl_set_growl_server_test \
 bsd_get_platform_name_test
 
-serverhack_program=serverhack_test \
-param_test
+serverhack_program=param_test
 
 script_program=automake_disable_libnotify_test.sh \
 donot_install_growlserverhack_test.sh
@@ -47,15 +46,10 @@ bsd_get_platform_name_test_CFLAGS=$(CMOCKA_CFLAGS)
 bsd_get_platform_name_test_LDADD=$(CMOCKA_LIBS)
 bsd_get_platform_name_test_SOURCES=bsd_get_platform_name_test.c ../src/libgrowl.c
 
-#donot_install_growlserverhack_test_SOURCES=donot_install_growlserverhack.c
-
-#AM_CFLAGS=-I$(top_srcdir)/src
-#AM_CFLAGS+=-D_TEST
-
 # serverhack GrowlServerHack
-serverhack_test_CFLAGS=$(CMOCKA_CFLAGS) $(LIBNOTIFY_CFLAGS) -D_TEST
-serverhack_test_LDADD=$(CMOCKA_LIBS) $(LIBNOTIFY_LIBS)
-serverhack_test_SOURCES=serverhack_test.c ../examples/serverhack.c
+#serverhack_test_CFLAGS=$(CMOCKA_CFLAGS) $(LIBNOTIFY_CFLAGS) 
+#serverhack_test_LDADD=$(CMOCKA_LIBS) $(LIBNOTIFY_LIBS)
+#serverhack_test_SOURCES=serverhack_test.c ../examples/serverhack.c
 
 param_test_CFLAGS=$(CMOCKA_CFLAGS)
 param_test_LDADD=$(CMOCKA_LIBS)

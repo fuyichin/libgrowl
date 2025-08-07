@@ -59,7 +59,7 @@ case
   Windows: _Windows Win32 Win64
 [ ] cr20. libgrowl. grownotify. cmocka. automake. Standardize pre-processor name for os platform:
   Sun: _SunOS Solaris
-[*] (1) cr21. libnotify. automake. Detect libnotify in automake configure script, enable by default, can be disable manually:
+[x] (1) cr21. libnotify. automake. Detect libnotify in automake configure script, enable by default, can be disable manually:
   libnotify enable by default, can by disable by --disable-libnotify in configure script
   if libnotify not detected on the host, disable it.
   if libnotify is enable, add -D_LIBNOTIFY in CFLAGS
@@ -100,15 +100,15 @@ case
   Note: Seems like this has been done, just need to modified the test script
   cmocka/automake_disable_libnotify_test.sh
   if disable, no -D_LIBNOTIFY in CFLAGS
-[ ] Discussion. Target to remove unnecessary C preprocessor macro _HACKSERVER, _TEST
+[x] cr30. Target to remove unnecessary C preprocessor macro _HACKSERVER, _TEST
   Too many preprocessor macro makes serverhack.c program logic hard to read and understand.
   Todo: 1. remove _TEST 2. remove _SERVERHACK
 
-  [ ] () _SERVERHACK, remove_serverhack_macro
+  [x] (1) _SERVERHACK, remove_serverhack_macro
   Always create serverhack program, just do not installed in binary. 
   Remove the 2nd main() in serverhack.c
   configure.ac, remove --enable-serverhack
-  [ ] (1) _TEST, remove_test_macro
+  [x] (1) _TEST, remove_test_macro
   Move get_param_mode() to a seperate file param.c and param.h
   Remove _TEST from cmocka/Makefile.am
 [ ] (0.5) cr. Create server hack binary to be run on busybox.

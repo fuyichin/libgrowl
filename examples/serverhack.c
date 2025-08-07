@@ -16,6 +16,7 @@ NOTIFY. reply ok and send message to dbus.
 #endif
 #include "libgrowl.h"
 #include "mygntp.h"
+#include "param.h"
 
 /* from libgrowl.c */
 // char *gntp_get_header_value(char *value, int size, char *header_code, char *message) 
@@ -43,8 +44,6 @@ int console_mode= TRUE;
 /* This program looks a bit complicated and confusing, please
    refer to the documentation of the program flow at the end of this file
 */
-#ifdef _SERVERHACK /* till end of the file */
-#ifndef _TEST
 int main(int argc, char *argv[]) {
 	int server_fd, new_socket, valread;
 	struct sockaddr_in address;
@@ -89,6 +88,9 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
+#ifdef _LIBNOTIFY
+	printf("Enable _LIBNOTIFY\n");
+#endif
 	printf("Server listening on port %d\n", PORT);
 
 	while (1) {
@@ -207,8 +209,6 @@ int main(int argc, char *argv[]) {
 	close(server_fd); // This line is unreachable in the current loop structure
 	return 0;
 }
-#endif /* _TEST */
-
 /*
 *  quick hack. from reply message ok
 */
@@ -249,37 +249,9 @@ char *serverhack_format_message_fail(char *message, char *code, char *descriptio
 	return message;
 }
 
-#else
-/* no server hack */
-#ifndef _TEST
-	int main() {
-		printf("Server hack is not enable, try --configure --enable-serverhack before compile\n");
-		return 1;
-	}
-#endif /* _TEST */
-#endif /* _SERVERHACK */
-
-int get_param_mode(char *args[], int argc, char *mode) {
-	int result= FALSE;
-	int i;
-
-	for (i=0; i<argc; i++) {
-		if (strcmp(args[i],mode)==0) {
-			result= TRUE;
-			/* if extra value after mode name, check is 0|off */
-			if (i+1<argc)
-				if (strcmp(args[i+1],"0")==0 || strcmp(args[i+1],"off")==0) {
-					result= FALSE;
-					break;
-				}
-		}
-	}
-	return result;
-}
-
 /* explanation of the program flow
 
-if -D_SERVERHACK not enable, this program do nothing, it is empty.
+-D_SERVERHACK is always enable, so remove the code, make the logic simpler
 
 // if -D_SERVERHACK
 while(1) {
@@ -296,9 +268,6 @@ while(1) {
 // if -D_LIBNOTIFY + console_mode=1, output message to console display
 
 // if no libnotify, just console_mode=1, output message to console display
-
-// when _TEST is enabled, it is used for cmocka unit test
-// it remove 2 main() from this program, 1. main() for server hack 2. main() no server hack
 
 // for testing [--disable-serverhack] (default)
 // for production --enable-serverhack, --disable-libnotify output message to console
