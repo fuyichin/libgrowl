@@ -115,7 +115,7 @@ case
 [ ] (0.5) cr. Create server hack binary to be run on busybox.
   Alpine use musl library. Busybox use glibc same? with Debian/ubuntu, 
   just do not include libnotify will do.
-[ ] (1) cr. Create a Dockerfile to run GrowServerHack on busybox.
+[ ] (1) cr31. Create a Dockerfile to run GrowServerHack on busybox.
   #docker_busybox_serverhack
   Create libgrowl/docker/busybox_serverhack/Dockerfile,
     # something like this
@@ -135,3 +135,50 @@ case
   But gcc will enable -O2, temporary use manual compile
   Use tcc to get a smaller binary for busybox. 
   examples$ tcc -O2 -D_SERVERHACK -I../src -o GrowlServerHack serverhack.c src/libgrowl.c
+[ ] (5) cr32. --disable-fork, -D_NO_FORK, cr23. no child process, line number will be continue.
+  1:<libgrowl>[Hello, libgrowl]
+  2:<libgrowl>[Hello, libgrowl]
+  3:<libgrowl>[Hello, libgrowl]
+  Note: This changes modified the workflow, a bit confusing. Refer to doc/
+  socket()
+  listen()
+  while(1) {
+  ...
+    new_socket= accept(); // wait for socket connection
+
+    while(valread= read(new_socket, buffer, 1024-1)>0) { // since growlnotify only send 1 message, can skip this while loop
+
+    } // end of read
+    close(new_socket);  
+  } // end of socket
+  close(server_fd); // This line is unreachable in the current loop structure
+
+  /* with fork() */
+  while(1) {
+    new_socket= accept();
+    pid= fork()l
+
+    if (pid==0) { // child
+      read socket
+      process message
+    }
+    else { // parent 
+      close(new_socket);
+    }
+  } // end of while, wait for new socket again
+
+[ ] (1) cr33. Add signal terminate (eg. kill signal) to stop server.
+[ ] (0) cr34. serverhack_format_message_ok() in serverhck.c, no test case
+  same for serverhack_format_message_fail(), no test case
+[ ] (2) cr35. 
+  Before cr32. --disable-fork, move process gntp request from the socket loop
+  while(1) {
+  ...
+    new_socket= accept();
+    valread= read(...);
+
+    // process gntp request
+    process_gntp_request();
+
+    close(new_socket);
+  }
