@@ -168,6 +168,19 @@ case
   } // end of while, wait for new socket again
 
 [ ] (1) cr33. Add signal terminate (eg. kill signal) to stop server.
+  #include <signal.h>
+
+  /* start signal alarm */
+  signal(SIGALRM, StopServer);
+
+  /* stop signal */
+  signal(SIGHUP, SIG_IGN);
+  signal(SIGINT, StopServer);
+  signal(SIGTERM, StopServer);
+
+  void StopServer(int sig) {
+  }
+
 [ ] (0) cr34. serverhack_format_message_ok() in serverhck.c, no test case
   same for serverhack_format_message_fail(), no test case
 [ ] (2) cr35. 
