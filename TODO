@@ -110,7 +110,11 @@ geometry: margin=2cm
 
 * ( ) Document how to compile on Windows using mingw
   - scoop install mingw-winlibs
-  
+
+* ( ) configure script give error:
+    PKG_CHECK_MODULES([LIBNOTIFY], [libnotify])
+    add space after ','.
+
 growlnotify
 =====
 
