@@ -115,6 +115,12 @@ geometry: margin=2cm
     PKG_CHECK_MODULES([LIBNOTIFY], [libnotify])
     add space after ','.
 
+* ( ) add _Windows in configuration script
+  configure.ac
+    *MSYS* | Windows)
+    CFLAGS="$CFLAGS -D_Windows"
+    ;;
+
 growlnotify
 =====
 
